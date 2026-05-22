@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дослідження когнітивних чинників професіоналізації особистості</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+        
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            opacity: 0.9;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            page-break-inside: avoid;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .section h3 {
+            color: #34495e;
+            margin: 20px 0 15px 0;
+        }
+        
+        .instruction {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .matrix-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .matrix-item {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            background: #fafafa;
+        }
+        
+        .matrix-item h4 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .matrix-svg {
+            display: block;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #eee;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .option {
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+            text-align: center;
+            background: white;
+        }
+        
+        .option span {
+            display: block;
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        .overlapping-figures {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .figure-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            background: #fafafa;
+            text-align: center;
+        }
+        
+        .figure-card h4 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .answer-box {
+            margin-top: 15px;
+            padding: 10px;
+            background: #fff;
+            border: 1px dashed #3498db;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .words-display {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .words-display .words {
+            font-size: 1.5em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            line-height: 2;
+        }
+        
+        .animal-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .animal-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            background: #fafafa;
+        }
+        
+        .animal-card h4 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .clock-template {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .correct-answer {
+            background: #d4edda;
+            border: 1px solid #28a745;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        
+        .correct-answer strong {
+            color: #155724;
+        }
+        
+        .print-note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .key-section {
+            background: #f8f9fa;
+            border: 2px solid #6c757d;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .key-section h3 {
+            color: #6c757d;
+            border-bottom: 2px solid #6c757d;
+            padding-bottom: 10px;
+        }
+        
+        @media print {
+            .section {
+                page-break-inside: avoid;
+            }
+            header {
+                background: #2c3e50 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .animal-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Сторінка згоди */
+        #consent-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        #consent-page .consent-box {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 700px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+
+        #consent-page .consent-box h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 25px;
+        }
+
+        #consent-page .consent-box p {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: #444;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        /* Основна частина — прихована за замовчуванням */
+        #main-content {
+            display: none;
+        }
+
+        /* Кнопки варіантів відповідей */
+        .option {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .option:hover {
+            border-color: #3498db;
+            background: #eaf4fb;
+        }
+
+        .option.selected {
+            border-color: #3498db;
+            background: #d6eaf8;
+        }
+
+        /* Підсумок */
+        #result-page {
+            display: none;
+        }
+
+        #result-page .result-box {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #result-page .result-box h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            border: none;
+            color: white;
+        }
+
+        #result-page .result-box p {
+            font-size: 1.2em;
+        }
+
+        /* Загальна кнопка "Далі" */
+        .btn-next {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-next:hover {
+            opacity: 0.9;
+        }
+
+        /* Правильні відповіді — приховані */
+        .correct-answer {
+            display: none;
+        }
+
+        .key-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== СТОРІНКА ЗГОДИ ==================== -->
+<div id="consent-page">
+    <div class="consent-box">
+        <h1>Дослідження когнітивних чинників<br>професіоналізації особистості</h1>
+        <p>
+            Вітаю! Це дослідження проводиться в межах дипломної бакалаврської роботи за спеціальністю «Психологія». Ваша участь є добровільною та анонімною. Усі отримані дані будуть використані виключно в узагальненому вигляді для наукових цілей згідно з Етичним кодексом психолога. Ви маєте право припинити опитування в будь-який момент. Натискаючи «Далі», ви надаєте згоду на участь в опитуванні і обробку ваших відповідей.
+        </p>
+        <button class="btn-next" onclick="startTest()">Далі →</button>
+    </div>
+</div>
+
+<!-- ==================== ОСНОВНИЙ КОНТЕНТ ==================== -->
+<div id="main-content">
+    <div class="container">
+        
+        <header>
+            <h1>Дослідження когнітивних чинників професіоналізації особистості</h1>
+            <p>Стимульні матеріали для когнітивного тестування</p>
+            <p>Бакалаврська робота | Олена Сумська</p>
+        </header>
+
+        <!-- ==================== СУБТЕСТ 1: ЛОГІЧНІ МАТРИЦІ ==================== -->
+        
+        <div class="section">
+            <h2>Субтест 1: Логічні матриці</h2>
+            <p><strong>Мета:</strong> Оцінка симультанної обробки інформації та абстрактного мислення</p>
+            
+            <div class="instruction">
+                <strong>Інструкція для респондента:</strong><br>
+                Перед Вами — зображення з візерунком, у якому відсутній один фрагмент (позначений знаком питання). Нижче подано 6 варіантів відповіді. Оберіть той фрагмент, який найкраще доповнює візерунок. Працюйте уважно, але не затримуйтесь надовго на одному завданні.
+            </div>
+            
+            <div class="matrix-container">
+                
+                <!-- Матриця 1 -->
+                <div class="matrix-item">
+                    <h4>Завдання 1</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <!-- Сітка 2x2 -->
+                        <rect x="10" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Фігури -->
+                        <circle cx="45" cy="45" r="20" fill="#3498db"/>
+                        <circle cx="120" cy="45" r="20" fill="none" stroke="#3498db" stroke-width="3"/>
+                        <circle cx="45" cy="120" r="20" fill="none" stroke="#3498db" stroke-width="3"/>
+                        
+                        <!-- Знак питання -->
+                        <text x="120" y="130" font-size="30" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="15" fill="#3498db"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="15" fill="none" stroke="#3498db" stroke-width="2"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="10" y="10" width="30" height="30" fill="#3498db"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="10" fill="#3498db"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,5 45,45 5,45" fill="#3498db"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="15" fill="none" stroke="#e74c3c" stroke-width="2"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 1</strong></div>
+                </div>
+                
+                <!-- Матриця 2 -->
+                <div class="matrix-item">
+                    <h4>Завдання 2</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <rect x="10" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Квадрати з різною кількістю точок -->
+                        <circle cx="35" cy="35" r="5" fill="#2c3e50"/>
+                        <circle cx="55" cy="55" r="5" fill="#2c3e50"/>
+                        
+                        <circle cx="105" cy="35" r="5" fill="#2c3e50"/>
+                        <circle cx="120" cy="45" r="5" fill="#2c3e50"/>
+                        <circle cx="135" cy="55" r="5" fill="#2c3e50"/>
+                        
+                        <circle cx="25" cy="105" r="5" fill="#2c3e50"/>
+                        <circle cx="45" cy="120" r="5" fill="#2c3e50"/>
+                        <circle cx="65" cy="135" r="5" fill="#2c3e50"/>
+                        <circle cx="35" cy="140" r="5" fill="#2c3e50"/>
+                        
+                        <text x="120" y="130" font-size="30" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="15" cy="15" r="4" fill="#2c3e50"/>
+                                <circle cx="25" cy="25" r="4" fill="#2c3e50"/>
+                                <circle cx="35" cy="35" r="4" fill="#2c3e50"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="15" cy="15" r="4" fill="#2c3e50"/>
+                                <circle cx="25" cy="25" r="4" fill="#2c3e50"/>
+                                <circle cx="35" cy="35" r="4" fill="#2c3e50"/>
+                                <circle cx="20" cy="40" r="4" fill="#2c3e50"/>
+                                <circle cx="40" cy="20" r="4" fill="#2c3e50"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="4" fill="#2c3e50"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="15" cy="25" r="4" fill="#2c3e50"/>
+                                <circle cx="35" cy="25" r="4" fill="#2c3e50"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="15" cy="15" r="4" fill="#2c3e50"/>
+                                <circle cx="35" cy="15" r="4" fill="#2c3e50"/>
+                                <circle cx="15" cy="35" r="4" fill="#2c3e50"/>
+                                <circle cx="35" cy="35" r="4" fill="#2c3e50"/>
+                                <circle cx="25" cy="25" r="4" fill="#2c3e50"/>
+                                <circle cx="25" cy="40" r="4" fill="#2c3e50"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="15" cy="15" r="4" fill="#2c3e50"/>
+                                <circle cx="35" cy="35" r="4" fill="#2c3e50"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 2</strong></div>
+                </div>
+                
+                <!-- Матриця 3 -->
+                <div class="matrix-item">
+                    <h4>Завдання 3</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <rect x="10" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Трикутники різної орієнтації -->
+                        <polygon points="45,20 65,60 25,60" fill="#e74c3c"/>
+                        <polygon points="120,60 140,20 100,20" fill="#e74c3c"/>
+                        <polygon points="25,100 65,100 45,140" fill="#e74c3c"/>
+                        
+                        <text x="120" y="130" font-size="30" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,10 40,40 10,40" fill="#e74c3c"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="10,10 40,10 25,40" fill="#e74c3c"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="10,25 40,10 40,40" fill="#e74c3c"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,40 40,10 10,10" fill="#e74c3c"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="10" y="10" width="30" height="30" fill="#e74c3c"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="40,25 10,10 10,40" fill="#e74c3c"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 4</strong></div>
+                </div>
+                
+                <!-- Матриця 4 -->
+                <div class="matrix-item">
+                    <h4>Завдання 4</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <rect x="10" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Паттерн: збільшення кількості ліній -->
+                        <line x1="20" y1="35" x2="50" y2="35" stroke="#9b59b6" stroke-width="3"/>
+                        
+                        <line x1="75" y1="30" x2="105" y2="30" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="75" y1="40" x2="105" y2="40" stroke="#9b59b6" stroke-width="3"/>
+                        
+                        <line x1="130" y1="25" x2="160" y2="25" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="130" y1="35" x2="160" y2="35" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="130" y1="45" x2="160" y2="45" stroke="#9b59b6" stroke-width="3"/>
+                        
+                        <line x1="20" y1="80" x2="50" y2="80" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="20" y1="90" x2="50" y2="90" stroke="#9b59b6" stroke-width="3"/>
+                        
+                        <line x1="75" y1="75" x2="105" y2="75" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="75" y1="85" x2="105" y2="85" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="75" y1="95" x2="105" y2="95" stroke="#9b59b6" stroke-width="3"/>
+                        
+                        <line x1="130" y1="72" x2="160" y2="72" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="130" y1="82" x2="160" y2="82" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="130" y1="92" x2="160" y2="92" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="130" y1="102" x2="160" y2="102" stroke="#9b59b6" stroke-width="3"/>
+                        
+                        <line x1="20" y1="135" x2="50" y2="135" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="20" y1="145" x2="50" y2="145" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="20" y1="155" x2="50" y2="155" stroke="#9b59b6" stroke-width="3"/>
+                        
+                        <line x1="75" y1="130" x2="105" y2="130" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="75" y1="140" x2="105" y2="140" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="75" y1="150" x2="105" y2="150" stroke="#9b59b6" stroke-width="3"/>
+                        <line x1="75" y1="160" x2="105" y2="160" stroke="#9b59b6" stroke-width="3"/>
+                        
+                        <text x="145" y="150" font-size="24" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="10" y1="15" x2="40" y2="15" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="22" x2="40" y2="22" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="29" x2="40" y2="29" stroke="#9b59b6" stroke-width="2"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="10" y1="12" x2="40" y2="12" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="20" x2="40" y2="20" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="28" x2="40" y2="28" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="36" x2="40" y2="36" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="44" x2="40" y2="44" stroke="#9b59b6" stroke-width="2"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="10" y1="15" x2="40" y2="15" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="25" x2="40" y2="25" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="35" x2="40" y2="35" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="45" x2="40" y2="45" stroke="#9b59b6" stroke-width="2"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="10" y1="20" x2="40" y2="20" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="30" x2="40" y2="30" stroke="#9b59b6" stroke-width="2"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="10" y1="25" x2="40" y2="25" stroke="#9b59b6" stroke-width="2"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="10" y1="10" x2="40" y2="10" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="17" x2="40" y2="17" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="24" x2="40" y2="24" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="31" x2="40" y2="31" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="38" x2="40" y2="38" stroke="#9b59b6" stroke-width="2"/>
+                                <line x1="10" y1="45" x2="40" y2="45" stroke="#9b59b6" stroke-width="2"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 2</strong></div>
+                </div>
+                
+                <!-- Матриця 5 -->
+                <div class="matrix-item">
+                    <h4>Завдання 5</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <rect x="10" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Квадрат + коло = квадрат з колом -->
+                        <rect x="25" y="25" width="40" height="40" fill="none" stroke="#27ae60" stroke-width="3"/>
+                        <circle cx="120" cy="45" r="20" fill="none" stroke="#27ae60" stroke-width="3"/>
+                        <rect x="25" y="100" width="40" height="40" fill="none" stroke="#27ae60" stroke-width="3"/>
+                        <circle cx="45" cy="120" r="12" fill="none" stroke="#27ae60" stroke-width="3"/>
+                        
+                        <text x="120" y="130" font-size="30" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="18" fill="none" stroke="#27ae60" stroke-width="2"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="10" y="10" width="30" height="30" fill="none" stroke="#27ae60" stroke-width="2"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="18" fill="none" stroke="#27ae60" stroke-width="2"/>
+                                <rect x="15" y="15" width="20" height="20" fill="none" stroke="#27ae60" stroke-width="2"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="10" y="10" width="30" height="30" fill="#27ae60"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="18" fill="none" stroke="#27ae60" stroke-width="2"/>
+                                <circle cx="25" cy="25" r="8" fill="none" stroke="#27ae60" stroke-width="2"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,5 45,40 5,40" fill="none" stroke="#27ae60" stroke-width="2"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 3</strong></div>
+                </div>
+                
+                <!-- Матриця 6 -->
+                <div class="matrix-item">
+                    <h4>Завдання 6</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <rect x="10" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Обертання стрілки -->
+                        <polygon points="35,20 45,35 38,35 38,50 32,50 32,35 25,35" fill="#f39c12"/>
+                        <polygon points="105,35 90,25 90,32 75,32 75,38 90,38 90,45" fill="#f39c12"/>
+                        <polygon points="145,50 135,35 142,35 142,20 148,20 148,35 155,35" fill="#f39c12"/>
+                        
+                        <polygon points="25,90 40,100 33,100 33,115 27,115 27,100 20,100" fill="#f39c12" transform="rotate(-45 35 90)"/>
+                        <polygon points="90,75 90,105 83,95 75,105 75,75 83,85" fill="#f39c12"/>
+                        <polygon points="145,105 155,90 148,90 148,75 142,75 142,90 135,90" fill="#f39c12" transform="rotate(45 145 90)"/>
+                        
+                        <polygon points="35,160 25,145 32,145 32,130 38,130 38,145 45,145" fill="#f39c12"/>
+                        <polygon points="75,145 90,155 90,148 105,148 105,142 90,142 90,135" fill="#f39c12"/>
+                        
+                        <text x="145" y="150" font-size="24" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,10 35,25 28,25 28,40 22,40 22,25 15,25" fill="#f39c12"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,40 15,25 22,25 22,10 28,10 28,25 35,25" fill="#f39c12"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="10,25 25,15 25,22 40,22 40,28 25,28 25,35" fill="#f39c12"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="40,25 25,35 25,28 10,28 10,22 25,22 25,15" fill="#f39c12"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="12" fill="#f39c12"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,40 15,25 22,25 22,10 28,10 28,25 35,25" fill="#f39c12" transform="rotate(45 25 25)"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 2</strong></div>
+                </div>
+                
+                <!-- Матриця 7 -->
+                <div class="matrix-item">
+                    <h4>Завдання 7</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <rect x="10" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Чверті кола -->
+                        <path d="M 15 45 A 30 30 0 0 1 45 15 L 45 45 Z" fill="#8e44ad"/>
+                        <path d="M 120 15 A 30 30 0 0 1 150 45 L 120 45 Z" fill="#8e44ad"/>
+                        <path d="M 45 150 A 30 30 0 0 1 15 120 L 45 120 Z" fill="#8e44ad"/>
+                        
+                        <text x="120" y="130" font-size="30" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <path d="M 25 10 A 20 20 0 0 1 45 30 L 25 30 Z" fill="#8e44ad"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <path d="M 45 30 A 20 20 0 0 1 25 50 L 25 30 Z" fill="#8e44ad"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <path d="M 25 50 A 20 20 0 0 1 5 30 L 25 30 Z" fill="#8e44ad"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <path d="M 5 30 A 20 20 0 0 1 25 10 L 25 30 Z" fill="#8e44ad"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="15" fill="#8e44ad"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <path d="M 10 25 A 15 15 0 0 0 40 25 Z" fill="#8e44ad"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 2</strong></div>
+                </div>
+                
+                <!-- Матриця 8 -->
+                <div class="matrix-item">
+                    <h4>Завдання 8</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <rect x="10" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Комбінація форм -->
+                        <circle cx="35" cy="35" r="12" fill="#3498db"/>
+                        <rect x="80" y="23" width="20" height="20" fill="#e74c3c"/>
+                        <polygon points="145,20 158,45 132,45" fill="#27ae60"/>
+                        
+                        <rect x="23" y="78" width="20" height="20" fill="#e74c3c"/>
+                        <polygon points="90,70 103,95 77,95" fill="#27ae60"/>
+                        <circle cx="145" cy="90" r="12" fill="#3498db"/>
+                        
+                        <polygon points="35,125 48,150 22,150" fill="#27ae60"/>
+                        <circle cx="90" cy="145" r="12" fill="#3498db"/>
+                        
+                        <text x="145" y="150" font-size="24" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="12" fill="#3498db"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="13" y="13" width="20" height="20" fill="#e74c3c"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,10 40,40 10,40" fill="#27ae60"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="12" fill="#e74c3c"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="13" y="13" width="20" height="20" fill="#27ae60"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,10 40,40 10,40" fill="#3498db"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 2</strong></div>
+                </div>
+                
+                <!-- Матриця 9 -->
+                <div class="matrix-item">
+                    <h4>Завдання 9</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <rect x="10" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Діагональ і колір -->
+                        <rect x="20" y="20" width="50" height="50" fill="#3498db"/>
+                        <polygon points="20,20 70,20 70,70" fill="#2c3e50"/>
+                        
+                        <rect x="95" y="20" width="50" height="50" fill="#2c3e50"/>
+                        <polygon points="95,20 145,20 145,70" fill="#3498db"/>
+                        
+                        <rect x="20" y="95" width="50" height="50" fill="#2c3e50"/>
+                        <polygon points="20,95 70,145 20,145" fill="#3498db"/>
+                        
+                        <text x="120" y="130" font-size="30" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="5" y="5" width="40" height="40" fill="#3498db"/>
+                                <polygon points="5,5 45,45 5,45" fill="#2c3e50"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="5" y="5" width="40" height="40" fill="#2c3e50"/>
+                                <polygon points="5,5 45,45 5,45" fill="#3498db"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="5" y="5" width="40" height="40" fill="#3498db"/>
+                                <polygon points="5,45 45,5 45,45" fill="#2c3e50"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="5" y="5" width="40" height="40" fill="#2c3e50"/>
+                                <polygon points="5,45 45,5 45,45" fill="#3498db"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="5" y="5" width="40" height="40" fill="#3498db"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="5" y="5" width="40" height="40" fill="#2c3e50"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 3</strong></div>
+                </div>
+                
+                <!-- Матриця 10 -->
+                <div class="matrix-item">
+                    <h4>Завдання 10</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <rect x="10" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Зменшення розміру по рядках -->
+                        <circle cx="35" cy="35" r="18" fill="none" stroke="#16a085" stroke-width="3"/>
+                        <circle cx="90" cy="35" r="14" fill="none" stroke="#16a085" stroke-width="3"/>
+                        <circle cx="145" cy="35" r="10" fill="none" stroke="#16a085" stroke-width="3"/>
+                        
+                        <rect x="17" y="72" width="36" height="36" fill="none" stroke="#16a085" stroke-width="3"/>
+                        <rect x="76" y="76" width="28" height="28" fill="none" stroke="#16a085" stroke-width="3"/>
+                        <rect x="133" y="80" width="20" height="20" fill="none" stroke="#16a085" stroke-width="3"/>
+                        
+                        <polygon points="35,127 53,163 17,163" fill="none" stroke="#16a085" stroke-width="3"/>
+                        <polygon points="90,133 104,158 76,158" fill="none" stroke="#16a085" stroke-width="3"/>
+                        
+                        <text x="145" y="150" font-size="24" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,12 40,42 10,42" fill="none" stroke="#16a085" stroke-width="2"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,18 35,38 15,38" fill="none" stroke="#16a085" stroke-width="2"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,22 32,36 18,36" fill="none" stroke="#16a085" stroke-width="2"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="8" fill="none" stroke="#16a085" stroke-width="2"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <rect x="17" y="17" width="16" height="16" fill="none" stroke="#16a085" stroke-width="2"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <polygon points="25,5 45,45 5,45" fill="none" stroke="#16a085" stroke-width="2"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 3</strong></div>
+                </div>
+                
+                <!-- Матриця 11 -->
+                <div class="matrix-item">
+                    <h4>Завдання 11</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <rect x="10" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="10" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="85" y="85" width="70" height="70" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- XOR логіка -->
+                        <circle cx="35" cy="35" r="15" fill="#e67e22"/>
+                        <circle cx="55" cy="55" r="15" fill="#e67e22"/>
+                        
+                        <circle cx="110" cy="35" r="15" fill="#e67e22"/>
+                        <circle cx="140" cy="55" r="15" fill="#e67e22"/>
+                        
+                        <circle cx="55" cy="110" r="15" fill="#e67e22"/>
+                        <circle cx="55" cy="140" r="15" fill="#e67e22"/>
+                        
+                        <text x="120" y="130" font-size="30" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="20" cy="20" r="10" fill="#e67e22"/>
+                                <circle cx="30" cy="30" r="10" fill="#e67e22"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="15" cy="25" r="10" fill="#e67e22"/>
+                                <circle cx="35" cy="25" r="10" fill="#e67e22"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="15" r="10" fill="#e67e22"/>
+                                <circle cx="25" cy="35" r="10" fill="#e67e22"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="10" fill="#e67e22"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="15" cy="15" r="8" fill="#e67e22"/>
+                                <circle cx="35" cy="15" r="8" fill="#e67e22"/>
+                                <circle cx="15" cy="35" r="8" fill="#e67e22"/>
+                                <circle cx="35" cy="35" r="8" fill="#e67e22"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <circle cx="30" cy="15" r="10" fill="#e67e22"/>
+                                <circle cx="20" cy="35" r="10" fill="#e67e22"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 6</strong></div>
+                </div>
+                
+                <!-- Матриця 12 -->
+                <div class="matrix-item">
+                    <h4>Завдання 12</h4>
+                    <svg class="matrix-svg" width="240" height="180" viewBox="0 0 240 180">
+                        <rect x="10" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="10" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="65" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="10" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="65" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        <rect x="120" y="120" width="50" height="50" fill="white" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Складна логіка: додавання елементів -->
+                        <line x1="20" y1="35" x2="50" y2="35" stroke="#c0392b" stroke-width="3"/>
+                        
+                        <line x1="75" y1="35" x2="105" y2="35" stroke="#c0392b" stroke-width="3"/>
+                        <line x1="90" y1="20" x2="90" y2="50" stroke="#c0392b" stroke-width="3"/>
+                        
+                        <line x1="130" y1="35" x2="160" y2="35" stroke="#c0392b" stroke-width="3"/>
+                        <line x1="145" y1="20" x2="145" y2="50" stroke="#c0392b" stroke-width="3"/>
+                        <line x1="130" y1="20" x2="160" y2="50" stroke="#c0392b" stroke-width="3"/>
+                        
+                        <line x1="35" y1="75" x2="35" y2="105" stroke="#c0392b" stroke-width="3"/>
+                        
+                        <line x1="75" y1="90" x2="105" y2="90" stroke="#c0392b" stroke-width="3"/>
+                        <line x1="90" y1="75" x2="90" y2="105" stroke="#c0392b" stroke-width="3"/>
+                        
+                        <line x1="130" y1="90" x2="160" y2="90" stroke="#c0392b" stroke-width="3"/>
+                        <line x1="145" y1="75" x2="145" y2="105" stroke="#c0392b" stroke-width="3"/>
+                        <line x1="160" y1="75" x2="130" y2="105" stroke="#c0392b" stroke-width="3"/>
+                        
+                        <line x1="20" y1="130" x2="50" y2="160" stroke="#c0392b" stroke-width="3"/>
+                        
+                        <line x1="75" y1="145" x2="105" y2="145" stroke="#c0392b" stroke-width="3"/>
+                        <line x1="75" y1="130" x2="105" y2="160" stroke="#c0392b" stroke-width="3"/>
+                        
+                        <text x="145" y="150" font-size="24" fill="#e74c3c" text-anchor="middle">?</text>
+                    </svg>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="10" y1="25" x2="40" y2="25" stroke="#c0392b" stroke-width="2"/>
+                                <line x1="10" y1="10" x2="40" y2="40" stroke="#c0392b" stroke-width="2"/>
+                            </svg>
+                            <span>1</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="10" y1="25" x2="40" y2="25" stroke="#c0392b" stroke-width="2"/>
+                                <line x1="25" y1="10" x2="25" y2="40" stroke="#c0392b" stroke-width="2"/>
+                                <line x1="10" y1="10" x2="40" y2="40" stroke="#c0392b" stroke-width="2"/>
+                            </svg>
+                            <span>2</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="10" y1="25" x2="40" y2="25" stroke="#c0392b" stroke-width="2"/>
+                                <line x1="25" y1="10" x2="25" y2="40" stroke="#c0392b" stroke-width="2"/>
+                                <line x1="40" y1="10" x2="10" y2="40" stroke="#c0392b" stroke-width="2"/>
+                            </svg>
+                            <span>3</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="10" y1="10" x2="40" y2="40" stroke="#c0392b" stroke-width="2"/>
+                                <line x1="40" y1="10" x2="10" y2="40" stroke="#c0392b" stroke-width="2"/>
+                            </svg>
+                            <span>4</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="10" y1="25" x2="40" y2="25" stroke="#c0392b" stroke-width="2"/>
+                                <line x1="10" y1="10" x2="40" y2="40" stroke="#c0392b" stroke-width="2"/>
+                                <line x1="40" y1="10" x2="10" y2="40" stroke="#c0392b" stroke-width="2"/>
+                            </svg>
+                            <span>5</span>
+                        </div>
+                        <div class="option">
+                            <svg width="50" height="50" viewBox="0 0 50 50">
+                                <line x1="25" y1="10" x2="25" y2="40" stroke="#c0392b" stroke-width="2"/>
+                                <line x1="10" y1="10" x2="40" y2="40" stroke="#c0392b" stroke-width="2"/>
+                            </svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь: 5</strong></div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- ==================== СУБТЕСТ 2: НАКЛАДЕНІ ФІГУРИ ==================== -->
+        
+        <div class="section">
+            <h2>Субтест 2: Накладені фігури (за типом проб Поппельрейтера)</h2>
+            <p><strong>Мета:</strong> Оцінка візуальної інтеграції та симультанного сприйняття</p>
+            
+            <div class="instruction">
+                <strong>Інструкція для респондента:</strong><br>
+                На зображенні показано кілька контурів предметів, накладених один на одного. Ваше завдання — визначити та перелічити ВСІ предмети, які Ви бачите. Уважно роздивіться зображення та впишіть назви предметів через кому.
+            </div>
+            
+            <div class="overlapping-figures">
+                
+                <!-- Картка 1 -->
+                <div class="figure-card">
+                    <h4>Зображення 1</h4>
+                    <svg width="300" height="250" viewBox="0 0 300 250">
+                        <!-- Відро -->
+                        <path d="M 60 80 L 40 180 L 120 180 L 100 80 Z" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <ellipse cx="80" cy="80" rx="22" ry="8" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <path d="M 58 75 Q 80 50 102 75" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        
+                        <!-- Ножиці -->
+                        <ellipse cx="150" cy="100" rx="25" ry="12" fill="none" stroke="#2c3e50" stroke-width="2.5" transform="rotate(-30 150 100)"/>
+                        <ellipse cx="200" cy="80" rx="25" ry="12" fill="none" stroke="#2c3e50" stroke-width="2.5" transform="rotate(30 200 80)"/>
+                        <line x1="165" y1="108" x2="220" y2="150" stroke="#2c3e50" stroke-width="2.5"/>
+                        <line x1="185" y1="88" x2="240" y2="130" stroke="#2c3e50" stroke-width="2.5"/>
+                        <circle cx="230" cy="140" r="5" fill="#2c3e50"/>
+                        
+                        <!-- Молоток -->
+                        <rect x="100" y="140" width="60" height="25" rx="3" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <rect x="125" y="165" width="10" height="70" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        
+                        <!-- Ключ -->
+                        <circle cx="220" cy="180" r="18" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <circle cx="220" cy="180" r="8" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <rect x="235" y="175" width="50" height="10" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <rect x="275" y="170" width="5" height="10" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <rect x="265" y="170" width="5" height="8" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        
+                        <!-- Пилка -->
+                        <rect x="30" y="190" width="120" height="8" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <path d="M 30 198 L 35 210 L 45 198 L 50 210 L 60 198 L 65 210 L 75 198 L 80 210 L 90 198 L 95 210 L 105 198 L 110 210 L 120 198 L 125 210 L 135 198 L 140 210 L 150 198" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <rect x="145" y="185" width="20" height="25" rx="2" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                    </svg>
+                    <div class="answer-box">
+                        <label style="font-weight:bold; display:block; margin-bottom:6px;">Відповідь (перелічіть через кому):</label>
+                        <textarea id="sub2_q1" rows="2" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:8px; font-size:1em; resize:vertical;" placeholder="наприклад: молоток, відро, ..."></textarea>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь:</strong> відро, ножиці, молоток, ключ, пилка (5 предметів)</div>
+                </div>
+                
+                <!-- Картка 2 -->
+                <div class="figure-card">
+                    <h4>Зображення 2</h4>
+                    <svg width="300" height="250" viewBox="0 0 300 250">
+                        <!-- Чашка -->
+                        <ellipse cx="80" cy="70" rx="40" ry="12" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <path d="M 40 70 Q 35 120 50 150 Q 80 165 110 150 Q 125 120 120 70" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <path d="M 120 85 Q 145 85 145 110 Q 145 135 120 135" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        
+                        <!-- Виделка -->
+                        <line x1="180" y1="40" x2="180" y2="100" stroke="#2c3e50" stroke-width="2.5"/>
+                        <line x1="190" y1="40" x2="190" y2="100" stroke="#2c3e50" stroke-width="2.5"/>
+                        <line x1="200" y1="40" x2="200" y2="100" stroke="#2c3e50" stroke-width="2.5"/>
+                        <line x1="210" y1="40" x2="210" y2="100" stroke="#2c3e50" stroke-width="2.5"/>
+                        <path d="M 175 100 Q 175 110 195 115 Q 215 110 215 100" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <rect x="190" y="115" width="10" height="80" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        
+                        <!-- Тарілка -->
+                        <ellipse cx="150" cy="180" rx="70" ry="25" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <ellipse cx="150" cy="180" rx="50" ry="18" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        
+                        <!-- Ложка -->
+                        <ellipse cx="250" cy="80" rx="20" ry="30" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <rect x="245" y="108" width="10" height="90" rx="3" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        
+                        <!-- Чайник -->
+                        <ellipse cx="70" cy="200" rx="35" ry="25" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <path d="M 35 195 Q 15 180 25 165" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <path d="M 105 190 Q 125 190 130 200 Q 125 210 105 210" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <ellipse cx="70" cy="175" rx="20" ry="5" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <rect x="65" y="165" width="10" height="10" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                    </svg>
+                    <div class="answer-box">
+                        <label style="font-weight:bold; display:block; margin-bottom:6px;">Відповідь (перелічіть через кому):</label>
+                        <textarea id="sub2_q2" rows="2" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:8px; font-size:1em; resize:vertical;" placeholder="наприклад: чашка, тарілка, ..."></textarea>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь:</strong> чашка, виделка, тарілка, ложка, чайник (5 предметів)</div>
+                </div>
+                
+                <!-- Картка 3 -->
+                <div class="figure-card">
+                    <h4>Зображення 3</h4>
+                    <svg width="300" height="250" viewBox="0 0 300 250">
+                        <!-- Окуляри -->
+                        <circle cx="70" cy="70" r="30" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <circle cx="160" cy="70" r="30" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <line x1="100" y1="70" x2="130" y2="70" stroke="#2c3e50" stroke-width="2.5"/>
+                        <line x1="40" y1="65" x2="20" y2="55" stroke="#2c3e50" stroke-width="2.5"/>
+                        <line x1="190" y1="65" x2="210" y2="55" stroke="#2c3e50" stroke-width="2.5"/>
+                        
+                        <!-- Годинник -->
+                        <circle cx="230" cy="130" r="40" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <circle cx="230" cy="130" r="35" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <line x1="230" y1="130" x2="230" y2="105" stroke="#2c3e50" stroke-width="2.5"/>
+                        <line x1="230" y1="130" x2="250" y2="140" stroke="#2c3e50" stroke-width="2"/>
+                        <circle cx="230" cy="130" r="3" fill="#2c3e50"/>
+                        
+                        <!-- Ручка -->
+                        <rect x="50" y="120" width="100" height="12" rx="6" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <polygon points="150,120 170,126 150,132" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <rect x="40" y="122" width="15" height="8" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        
+                        <!-- Книга -->
+                        <rect x="30" y="160" width="80" height="60" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <line x1="70" y1="160" x2="70" y2="220" stroke="#2c3e50" stroke-width="2"/>
+                        <path d="M 30 160 Q 25 190 30 220" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        
+                        <!-- Ножиці -->
+                        <ellipse cx="180" cy="190" rx="20" ry="10" fill="none" stroke="#2c3e50" stroke-width="2.5" transform="rotate(-20 180 190)"/>
+                        <ellipse cx="220" cy="175" rx="20" ry="10" fill="none" stroke="#2c3e50" stroke-width="2.5" transform="rotate(20 220 175)"/>
+                        <line x1="192" y1="196" x2="240" y2="230" stroke="#2c3e50" stroke-width="2.5"/>
+                        <line x1="208" y1="180" x2="256" y2="214" stroke="#2c3e50" stroke-width="2.5"/>
+                        <circle cx="248" cy="222" r="4" fill="#2c3e50"/>
+                        
+                        <!-- Олівець -->
+                        <rect x="130" y="200" width="60" height="10" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <polygon points="190,200 205,205 190,210" fill="none" stroke="#2c3e50" stroke-width="2.5"/>
+                        <rect x="120" y="202" width="12" height="6" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                    </svg>
+                    <div class="answer-box">
+                        <label style="font-weight:bold; display:block; margin-bottom:6px;">Відповідь (перелічіть через кому):</label>
+                        <textarea id="sub2_q3" rows="2" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:8px; font-size:1em; resize:vertical;" placeholder="наприклад: ручка, окуляри, ..."></textarea>
+                    </div>
+                    <div class="correct-answer"><strong>Правильна відповідь:</strong> окуляри, годинник, ручка, книга, ножиці, олівець (6 предметів)</div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- ==================== СУБТЕСТ 3: ЗАПАМ'ЯТОВУВАННЯ СЛІВ ==================== -->
+        
+        <div class="section">
+            <h2>Субтест 3: Запам'ятовування слів (модифікація за методикою Лурія)</h2>
+            <p><strong>Мета:</strong> Оцінка сукцесивної обробки інформації та короткочасної слухової пам'яті</p>
+            
+            <div class="instruction">
+                <strong>Інструкція для респондента:</strong><br>
+                Зараз Вам буде показано список із 10 слів. Уважно прочитайте їх ОДИН раз (приблизно 30-40 секунд). Потім список зникне, і Вас попросять записати всі слова, які запам'яталися, у будь-якому порядку.
+            </div>
+            
+            <div id="words-display-block" class="words-display">
+                <p style="margin-bottom: 15px; opacity: 0.8;">Запам'ятайте ці слова:</p>
+                <div class="words">
+                    ЛІС — ХЛІБ — ВІКНО — СТІЛЕЦЬ — ВОДА<br>
+                    БРАТ — КІНЬ — ГРИБ — ГОЛКА — МЕД
+                </div>
+                <button onclick="hideWords()" style="margin-top:20px; background:white; color:#2c3e50; border:none; padding:10px 28px; border-radius:7px; font-size:1em; font-weight:bold; cursor:pointer;">Я запам'ятав(ла) — прибрати слова</button>
+            </div>
+            
+            <div id="words-answer-block" style="display:none;">
+                <div class="answer-box" style="min-height: 80px;">
+                    <label style="font-weight:bold; display:block; margin-bottom:6px;">Відтворення (запишіть слова у будь-якому порядку через кому):</label>
+                    <textarea id="sub3_words" rows="3" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:8px; font-size:1em; resize:vertical;" placeholder="ліс, хліб, ..."></textarea>
+                </div>
+            </div>
+            
+            <div class="key-section">
+                <h3>Ключ для оцінювання</h3>
+                <p><strong>Повний список слів:</strong> ліс, хліб, вікно, стілець, вода, брат, кінь, гриб, голка, мед</p>
+                <p><strong>Оцінка:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>9-10 слів — висока продуктивність пам'яті</li>
+                    <li>7-8 слів — середня продуктивність</li>
+                    <li>5-6 слів — знижена продуктивність</li>
+                    <li>Менше 5 слів — низька продуктивність</li>
+                </ul>
+                <p style="margin-top: 10px;"><strong>Додатково враховується:</strong> кількість повторень, конфабуляцій (вигаданих слів), порядок відтворення</p>
+            </div>
+        </div>
+
+        <!-- ==================== СУБТЕСТ 4: ЗАВДАННЯ MoCA ==================== -->
+        
+        <div class="section">
+            <h2>Субтест 4: Короткі когнітивні завдання (адаптація MoCA)</h2>
+            <p><strong>Мета:</strong> Оцінка орієнтації, називання та абстрактного мислення</p>
+            
+            <h3>Частина А: Називання тварин</h3>
+            
+            <div class="instruction">
+                <strong>Інструкція:</strong> Назвіть тварин, зображених на малюнках.
+            </div>
+            
+            <div class="animal-cards">
+                <!-- Лев -->
+                <div class="animal-card">
+                    <h4>Тварина 1</h4>
+                    <svg width="150" height="120" viewBox="0 0 150 120">
+                        <!-- Тіло -->
+                        <ellipse cx="75" cy="70" rx="40" ry="25" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Голова -->
+                        <circle cx="40" cy="55" r="20" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Грива -->
+                        <circle cx="40" cy="55" r="28" fill="none" stroke="#2c3e50" stroke-width="2" stroke-dasharray="5,3"/>
+                        <!-- Вуха -->
+                        <circle cx="25" cy="38" r="6" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <circle cx="55" cy="38" r="6" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Морда -->
+                        <ellipse cx="32" cy="60" rx="8" ry="5" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Очі -->
+                        <circle cx="35" cy="50" r="2" fill="#2c3e50"/>
+                        <circle cx="48" cy="50" r="2" fill="#2c3e50"/>
+                        <!-- Ноги -->
+                        <line x1="50" y1="90" x2="50" y2="110" stroke="#2c3e50" stroke-width="3"/>
+                        <line x1="65" y1="90" x2="65" y2="110" stroke="#2c3e50" stroke-width="3"/>
+                        <line x1="90" y1="90" x2="90" y2="110" stroke="#2c3e50" stroke-width="3"/>
+                        <line x1="105" y1="90" x2="105" y2="110" stroke="#2c3e50" stroke-width="3"/>
+                        <!-- Хвіст -->
+                        <path d="M 115 70 Q 130 60 135 75 Q 138 85 130 88" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <ellipse cx="128" cy="90" rx="5" ry="8" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                    </svg>
+                    <div class="answer-box"><label style="font-weight:bold;">Відповідь:</label><br><input type="text" id="sub4_animal1" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:7px; font-size:1em; margin-top:4px;" placeholder="Назва тварини"></div>
+                    <div class="correct-answer"><strong>Правильно:</strong> Лев</div>
+                </div>
+                
+                <!-- Носоріг -->
+                <div class="animal-card">
+                    <h4>Тварина 2</h4>
+                    <svg width="150" height="120" viewBox="0 0 150 120">
+                        <!-- Тіло -->
+                        <ellipse cx="80" cy="65" rx="50" ry="30" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Голова -->
+                        <ellipse cx="25" cy="55" rx="20" ry="18" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Ріг -->
+                        <polygon points="15,40 20,20 25,40" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <polygon points="28,45 32,35 36,45" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Вухо -->
+                        <ellipse cx="40" cy="40" rx="5" ry="10" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Око -->
+                        <circle cx="30" cy="50" r="3" fill="#2c3e50"/>
+                        <!-- Ноги -->
+                        <rect x="45" y="85" width="12" height="25" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <rect x="65" y="85" width="12" height="25" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <rect x="90" y="85" width="12" height="25" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <rect x="110" y="85" width="12" height="25" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Хвіст -->
+                        <path d="M 130 65 Q 140 60 138 70" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                    </svg>
+                    <div class="answer-box"><label style="font-weight:bold;">Відповідь:</label><br><input type="text" id="sub4_animal2" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:7px; font-size:1em; margin-top:4px;" placeholder="Назва тварини"></div>
+                    <div class="correct-answer"><strong>Правильно:</strong> Носоріг</div>
+                </div>
+                
+                <!-- Верблюд -->
+                <div class="animal-card">
+                    <h4>Тварина 3</h4>
+                    <svg width="150" height="120" viewBox="0 0 150 120">
+                        <!-- Тіло з горбами -->
+                        <path d="M 30 70 Q 50 30 70 60 Q 90 30 110 70 L 110 75 L 30 75 Z" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Шия і голова -->
+                        <path d="M 30 70 Q 20 50 15 35" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <ellipse cx="12" cy="30" rx="10" ry="8" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Вуха -->
+                        <ellipse cx="8" cy="20" rx="3" ry="6" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <ellipse cx="18" cy="20" rx="3" ry="6" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                        <!-- Око -->
+                        <circle cx="8" cy="28" r="2" fill="#2c3e50"/>
+                        <!-- Ноги -->
+                        <line x1="45" y1="75" x2="45" y2="110" stroke="#2c3e50" stroke-width="3"/>
+                        <line x1="60" y1="75" x2="60" y2="110" stroke="#2c3e50" stroke-width="3"/>
+                        <line x1="85" y1="75" x2="85" y2="110" stroke="#2c3e50" stroke-width="3"/>
+                        <line x1="100" y1="75" x2="100" y2="110" stroke="#2c3e50" stroke-width="3"/>
+                        <!-- Хвіст -->
+                        <path d="M 110 72 Q 120 65 125 75 L 122 80" fill="none" stroke="#2c3e50" stroke-width="2"/>
+                    </svg>
+                    <div class="answer-box"><label style="font-weight:bold;">Відповідь:</label><br><input type="text" id="sub4_animal3" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:7px; font-size:1em; margin-top:4px;" placeholder="Назва тварини"></div>
+                    <div class="correct-answer"><strong>Правильно:</strong> Верблюд</div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 30px;">Частина Б: Абстракція (узагальнення)</h3>
+            
+            <div class="instruction">
+                <strong>Інструкція:</strong> Визначте, що спільного між двома поняттями. Дайте узагальнюючу відповідь (одне слово або коротка фраза).
+            </div>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                <tr style="background: #f8f9fa;">
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: left;">Пара понять</th>
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: left;">Відповідь респондента</th>
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: left; display:none;">Правильна відповідь</th>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><strong>Апельсин — Банан</strong></td>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><input type="text" id="sub4_abs1" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:6px; font-size:1em;" placeholder="Що спільного?"></td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #27ae60; display:none;">Фрукти</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td style="padding: 12px; border: 1px solid #ddd;"><strong>Годинник — Лінійка</strong></td>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><input type="text" id="sub4_abs2" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:6px; font-size:1em;" placeholder="Що спільного?"></td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #27ae60; display:none;">Вимірювальні прилади / інструменти для вимірювання</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><strong>Потяг — Велосипед</strong></td>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><input type="text" id="sub4_abs3" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:6px; font-size:1em;" placeholder="Що спільного?"></td>
+                    <td style="padding: 12px; border: 1px solid #ddd; color: #27ae60; display:none;">Транспорт / засоби пересування</td>
+                </tr>
+            </table>
+            
+            <h3 style="margin-top: 30px;">Частина В: Орієнтація в часі</h3>
+            
+            <div class="instruction">
+                <strong>Інструкція:</strong> Дайте відповіді на запитання про поточну дату без використання допоміжних засобів.
+            </div>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                <tr style="background: #f8f9fa;">
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: left;">Запитання</th>
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: left;">Відповідь респондента</th>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;">Яке сьогодні число (день місяця)?</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><input type="text" id="sub4_date1" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:6px; font-size:1em;" placeholder="Число"></td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td style="padding: 12px; border: 1px solid #ddd;">Який зараз місяць?</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><input type="text" id="sub4_date2" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:6px; font-size:1em;" placeholder="Місяць"></td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;">Який зараз рік?</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><input type="text" id="sub4_date3" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:6px; font-size:1em;" placeholder="Рік"></td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td style="padding: 12px; border: 1px solid #ddd;">Який сьогодні день тижня?</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;"><input type="text" id="sub4_date4" style="width:100%; border:1px solid #3498db; border-radius:5px; padding:6px; font-size:1em;" placeholder="День тижня"></td>
+                </tr>
+            </table>
+            
+            <div class="key-section" style="margin-top: 20px;">
+                <h3>Оцінювання</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Називання:</strong> 1 бал за кожну правильно названу тварину (макс. 3 бали)</li>
+                    <li><strong>Абстракція:</strong> 1 бал за кожне правильне узагальнення (макс. 3 бали)</li>
+                    <li><strong>Орієнтація:</strong> 1 бал за кожну правильну відповідь (макс. 4 бали)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ==================== СУБТЕСТ 5: МАЛЮВАННЯ ГОДИННИКА ==================== -->
+        
+        <div class="section">
+            <h2>Субтест 5: Малювання годинника</h2>
+            <p><strong>Мета:</strong> Оцінка планування, просторової організації та виконавчих функцій</p>
+            
+            <div class="instruction">
+                <strong>Інструкція для респондента:</strong><br>
+                Намалюйте годинник повністю: спочатку намалюйте контур кола, потім розставте всі 12 цифр на циферблаті, а потім намалюйте годинну та хвилинну стрілки, які показують час <strong>«10 хвилин на дванадцяту»</strong> (11:10). Використовуйте коло нижче як орієнтир.
+            </div>
+            
+            <div class="clock-template">
+                <div style="text-align:center; margin: 10px 0 5px;">
+                    <button onclick="clearCanvas()" style="background:#e74c3c; color:white; border:none; padding:8px 18px; border-radius:6px; cursor:pointer; font-size:0.95em;">🗑 Очистити</button>
+                    <span style="margin-left:12px; color:#888; font-size:0.9em;">Намалюйте пальцем або мишкою</span>
+                </div>
+                <canvas id="clockCanvas" width="300" height="300"
+                    style="border: 1px dashed #ccc; border-radius: 8px; cursor: crosshair; touch-action: none; display:block; margin:0 auto; background:white;"></canvas>
+            </div>
+            
+            <div class="key-section">
+                <h3>Ключ для оцінювання (шкала 0–130 балів)</h3>
+                
+                <h4 style="margin-top: 15px;">Контур кола:</h4>
+                <ul style="margin-left: 20px;">
+                    <li>Правильне коло — повний залік; значні викривлення або відсутність — 0</li>
+                </ul>
+                
+                <h4 style="margin-top: 15px;">Цифри циферблату:</h4>
+                <ul style="margin-left: 20px;">
+                    <li>Усі 12 цифр на правильних місцях — ідеально</li>
+                    <li>Пропущені або переставлені — знижує бал</li>
+                    <li>Відсутність або хаос — 0</li>
+                </ul>
+                
+                <h4 style="margin-top: 15px;">Стрілки (час 11:10):</h4>
+                <ul style="margin-left: 20px;">
+                    <li>Обидві стрілки правильні за напрямком і довжиною — ідеально</li>
+                    <li>Незначні помилки — знижує бал</li>
+                    <li>Відсутність або повний хаос — 0</li>
+                </ul>
+            </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #e8f4f8; border-radius: 5px;">
+                    <strong>Еталонний годинник (11:10):</strong>
+                    <div style="text-align: center; margin-top: 10px;">
+                        <svg width="150" height="150" viewBox="0 0 150 150">
+                            <circle cx="75" cy="75" r="70" fill="white" stroke="#2c3e50" stroke-width="2"/>
+                            <!-- Цифри правильно розташовані по колу годинника -->
+                            <text x="75" y="18" text-anchor="middle" font-size="11" fill="#2c3e50">12</text>
+                            <text x="110" y="28" text-anchor="middle" font-size="11" fill="#2c3e50">1</text>
+                            <text x="133" y="52" text-anchor="middle" font-size="11" fill="#2c3e50">2</text>
+                            <text x="141" y="79" text-anchor="middle" font-size="11" fill="#2c3e50">3</text>
+                            <text x="133" y="106" text-anchor="middle" font-size="11" fill="#2c3e50">4</text>
+                            <text x="110" y="128" text-anchor="middle" font-size="11" fill="#2c3e50">5</text>
+                            <text x="75" y="138" text-anchor="middle" font-size="11" fill="#2c3e50">6</text>
+                            <text x="40" y="128" text-anchor="middle" font-size="11" fill="#2c3e50">7</text>
+                            <text x="17" y="106" text-anchor="middle" font-size="11" fill="#2c3e50">8</text>
+                            <text x="9" y="79" text-anchor="middle" font-size="11" fill="#2c3e50">9</text>
+                            <text x="17" y="52" text-anchor="middle" font-size="11" fill="#2c3e50">10</text>
+                            <text x="40" y="28" text-anchor="middle" font-size="11" fill="#2c3e50">11</text>
+                            <!-- Хвилинна стрілка на 2 (10 хвилин) -->
+                            <line x1="75" y1="75" x2="111" y2="50" stroke="#2c3e50" stroke-width="2"/>
+                            <!-- Годинна стрілка на 11 -->
+                            <line x1="75" y1="75" x2="47" y2="37" stroke="#2c3e50" stroke-width="3"/>
+                            <circle cx="75" cy="75" r="4" fill="#2c3e50"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== ПОДЯКА ==================== -->
+        
+        <div class="section" style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; text-align: center;">
+            <h2 style="color: white; border-bottom-color: rgba(255,255,255,0.3);">Щиро дякую за участь у дослідженні!</h2>
+            <p style="font-size: 1.1em; margin: 20px 0;">
+                Ваші відповіді є цінним внеском у наукове дослідження когнітивних чинників професіоналізації особистості.
+            </p>
+            <p style="margin-top: 30px; opacity: 0.9;">
+                Усі дані будуть оброблені анонімно та використані виключно в узагальненому вигляді для наукових цілей.
+            </p>
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.3);">
+                <p><strong>З повагою та вдячністю,</strong></p>
+                <p style="font-size: 1.2em; margin-top: 10px;">Олена Сумська</p>
+                <p style="opacity: 0.8; margin-top: 5px;">Бакалаврська робота, 2026</p>
+            </div>
+            <div style="margin-top: 30px;">
+                <button class="btn-next" onclick="finishTest()" style="background: white; color: #27ae60; font-weight: bold;">Завершити тестування</button>
+            </div>
+        </div>
+
+        <!-- ==================== ІНФОРМАЦІЯ ДЛЯ ДОСЛІДНИКА ==================== -->
+        
+        <div class="section" style="display:none; background: #f8f9fa; border: 2px dashed #6c757d;">
+            <h2 style="color: #6c757d;">📋 Інформація для дослідника</h2>
+            
+            <h3>Використання матеріалів</h3>
+            <p>Цей документ містить усі стимульні матеріали для завантаження в Google Forms:</p>
+            <ol style="margin-left: 20px; margin-top: 10px;">
+                <li>Відкрийте HTML-файл у браузері</li>
+                <li>Клацніть правою кнопкою на потрібному зображенні → «Зберегти зображення як...»</li>
+                <li>Або зробіть скріншот окремих елементів</li>
+                <li>Завантажте зображення до відповідних запитань Google Forms</li>
+            </ol>
+            
+            <h3 style="margin-top: 20px;">Зведена таблиця субтестів</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                <tr style="background: #2c3e50; color: white;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">Субтест</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Когнітивний процес</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">К-сть завдань</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Макс. бал</th>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">1. Логічні матриці</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Симультанна обробка, абстрактне мислення</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">12</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">12</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td style="padding: 10px; border: 1px solid #ddd;">2. Накладені фігури</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Візуальна інтеграція</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">3</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">16*</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">3. Запам'ятовування слів</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Сукцесивна обробка, пам'ять</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">1</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">10</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td style="padding: 10px; border: 1px solid #ddd;">4. Когнітивні завдання</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Орієнтація, називання, абстракція</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">10</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">10</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">5. Малювання годинника</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Планування, просторова організація</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">1</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">10</td>
+                </tr>
+            </table>
+            <p style="margin-top: 10px; font-size: 0.9em; color: #666;">* Накладені фігури: 5+5+6 = 16 предметів загалом</p>
+            
+            <h3 style="margin-top: 20px;">Контакти</h3>
+            <p>📧 Email для отримання результатів: <strong>olena.sumska26@gmail.com</strong></p>
+        </div>
+        
+    </div><!-- end .container -->
+</div><!-- end #main-content -->
+
+<!-- ==================== СТОРІНКА РЕЗУЛЬТАТУ ==================== -->
+<div id="result-page">
+    <div class="container">
+        <div class="result-box">
+            <h2 id="result-text">Чудовий результат!</h2>
+            <p id="result-score"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+// ================ ЛОГІКА ТЕСТУВАННЯ ================
+
+function startTest() {
+    document.getElementById('consent-page').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    window.scrollTo(0, 0);
+}
+
+// Правильні відповіді для логічних матриць (субтест 1)
+const correctAnswers = {
+    m1: '1', m2: '2', m3: '1', m4: '2', m5: '3',
+    m6: '2', m7: '2', m8: '2', m9: '1', m10: '3',
+    m11: '6', m12: '5'
+};
+
+// Зберігаємо вибори користувача
+const userAnswers = {};
+
+// Робимо опції клікабельними
+document.addEventListener('DOMContentLoaded', function() {
+    // --- Субтест 1: кнопки вибору ---
+    const allOptionsGrids = document.querySelectorAll('.options-grid');
+    allOptionsGrids.forEach(function(grid, idx) {
+        const matrixKey = 'm' + (idx + 1);
+        const options = grid.querySelectorAll('.option');
+        options.forEach(function(opt) {
+            opt.style.cursor = 'pointer';
+            opt.addEventListener('click', function() {
+                options.forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+                const optNum = opt.querySelector('span').textContent.trim();
+                userAnswers[matrixKey] = optNum;
+            });
+        });
+    });
+
+    // --- Субтест 5: canvas для малювання ---
+    const canvas = document.getElementById('clockCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.strokeStyle = '#222';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    // Малюємо бліде орієнтовне коло
+    ctx.beginPath();
+    ctx.arc(150, 150, 138, 0, Math.PI * 2);
+    ctx.strokeStyle = '#ddd';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.strokeStyle = '#222';
+    ctx.lineWidth = 2.5;
+
+    let drawing = false;
+    let lastX = 0, lastY = 0;
+
+    function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        if (e.touches) {
+            return {
+                x: (e.touches[0].clientX - rect.left) * scaleX,
+                y: (e.touches[0].clientY - rect.top) * scaleY
+            };
+        }
+        return {
+            x: (e.clientX - rect.left) * scaleX,
+            y: (e.clientY - rect.top) * scaleY
+        };
+    }
+
+    canvas.addEventListener('mousedown', function(e) {
+        drawing = true;
+        const pos = getPos(e);
+        lastX = pos.x; lastY = pos.y;
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+    });
+    canvas.addEventListener('mousemove', function(e) {
+        if (!drawing) return;
+        const pos = getPos(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+        lastX = pos.x; lastY = pos.y;
+    });
+    canvas.addEventListener('mouseup', () => drawing = false);
+    canvas.addEventListener('mouseleave', () => drawing = false);
+
+    canvas.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        drawing = true;
+        const pos = getPos(e);
+        lastX = pos.x; lastY = pos.y;
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+    }, { passive: false });
+    canvas.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+        if (!drawing) return;
+        const pos = getPos(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+        lastX = pos.x; lastY = pos.y;
+    }, { passive: false });
+    canvas.addEventListener('touchend', () => drawing = false);
+});
+
+function clearCanvas() {
+    const canvas = document.getElementById('clockCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Перемальовуємо орієнтовне коло
+    ctx.beginPath();
+    ctx.arc(150, 150, 138, 0, Math.PI * 2);
+    ctx.strokeStyle = '#ddd';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.strokeStyle = '#222';
+    ctx.lineWidth = 2.5;
+}
+
+function hideWords() {
+    document.getElementById('words-display-block').style.display = 'none';
+    document.getElementById('words-answer-block').style.display = 'block';
+}
+
+function normalizeWord(w) {
+    return w.trim().toLowerCase()
+        .replace(/ї/g,'і').replace(/є/g,'е').replace(/ґ/g,'г');
+}
+
+function finishTest() {
+    const now = new Date();
+
+    // ===== СУБТЕСТ 1+2: Симультанна обробка (макс. 140 балів) =====
+    // Суб1: кожна правильна відповідь = 5 балів (12 × 5 = 60)
+    let sub1Score = 0;
+    for (let key in correctAnswers) {
+        if (userAnswers[key] === correctAnswers[key]) sub1Score += 5;
+    }
+
+    // Суб2: кожен правильно вказаний предмет = 5 балів (5+5+6=16 × 5 = 80)
+    const sub2Answers = [
+        { id: 'sub2_q1', correct: ['відро','ножиці','молоток','ключ','пилка'] },
+        { id: 'sub2_q2', correct: ['чашка','виделка','тарілка','ложка','чайник'] },
+        { id: 'sub2_q3', correct: ['окуляри','годинник','ручка','книга','ножиці','олівець'] }
+    ];
+    let sub2Score = 0;
+    const sub2Raw = [];
+    sub2Answers.forEach(function(q) {
+        const el = document.getElementById(q.id);
+        const raw = el ? el.value : '';
+        sub2Raw.push(raw);
+        if (!raw.trim()) return;
+        const given = raw.split(',').map(normalizeWord).filter(Boolean);
+        q.correct.forEach(function(c) {
+            if (given.includes(normalizeWord(c))) sub2Score += 5;
+        });
+    });
+
+    const simultaneousTotal = sub1Score + sub2Score; // макс. 140
+
+    // ===== СУБТЕСТ 3: Сукцесивна обробка (макс. 150 балів) =====
+    const correctWords = ['ліс','хліб','вікно','стілець','вода','брат','кінь','гриб','голка','мед'];
+    const sub3El = document.getElementById('sub3_words');
+    const sub3Raw = sub3El ? sub3El.value : '';
+    let sub3Score = 0;
+    if (sub3Raw.trim()) {
+        const givenWords = sub3Raw.split(',').map(normalizeWord).filter(Boolean);
+        correctWords.forEach(function(w) {
+            if (givenWords.includes(normalizeWord(w))) sub3Score += 15;
+        });
+    }
+
+    // ===== СУБТЕСТ 4: Орієнтування (макс. 150 балів = 10 × 15) =====
+    // Тварини
+    const animalAnswers = [
+        { id: 'sub4_animal1', correct: ['лев','лева'] },
+        { id: 'sub4_animal2', correct: ['носоріг','носорога'] },
+        { id: 'sub4_animal3', correct: ['верблюд','верблюда'] }
+    ];
+    let sub4Score = 0;
+    animalAnswers.forEach(function(a) {
+        const el = document.getElementById(a.id);
+        if (el && a.correct.includes(normalizeWord(el.value))) sub4Score += 15;
+    });
+
+    // Абстракція
+    const absAnswers = [
+        { id: 'sub4_abs1', correct: ['фрукти','фрукт'] },
+        { id: 'sub4_abs2', correct: ['вимірювальні прилади','прилади','інструменти','вимірювальні інструменти'] },
+        { id: 'sub4_abs3', correct: ['транспорт','засоби пересування','засіб пересування'] }
+    ];
+    absAnswers.forEach(function(a) {
+        const el = document.getElementById(a.id);
+        if (!el || !el.value.trim()) return;
+        const val = normalizeWord(el.value);
+        if (a.correct.some(c => normalizeWord(c) === val || val.includes(normalizeWord(c)))) sub4Score += 15;
+    });
+
+    // Орієнтація в часі — порівняння з поточною датою
+    const months = ['січня','лютого','березня','квітня','травня','червня',
+                    'липня','серпня','вересня','жовтня','листопада','грудня'];
+    const monthsAlt = ['січень','лютий','березень','квітень','травень','червень',
+                       'липень','серпень','вересень','жовтень','листопад','грудень'];
+    const days = ['неділя','понеділок','вівторок','середа','четвер','п\'ятниця','субота'];
+    const daysAlt = ['неділю','понеділок','вівторок','середу','четвер','п\'ятницю','суботу'];
+
+    const todayDate  = now.getDate();
+    const todayMonth = now.getMonth(); // 0-based
+    const todayYear  = now.getFullYear();
+    const todayDay   = now.getDay();   // 0=Sunday
+
+    function checkDate(id, correct) {
+        const el = document.getElementById(id);
+        if (!el || !el.value.trim()) return false;
+        const val = normalizeWord(el.value);
+        return correct.some(c => normalizeWord(String(c)) === val);
+    }
+
+    if (checkDate('sub4_date1', [todayDate, String(todayDate)])) sub4Score += 15;
+    if (checkDate('sub4_date2', [months[todayMonth], monthsAlt[todayMonth], String(todayMonth+1)])) sub4Score += 15;
+    if (checkDate('sub4_date3', [todayYear, String(todayYear)])) sub4Score += 15;
+    if (checkDate('sub4_date4', [days[todayDay], daysAlt[todayDay]])) sub4Score += 15;
+
+    // ===== СУБТЕСТ 5: Планування (0–130 балів) =====
+    // Оцінюється дослідником вручну — тут 0 за замовчуванням, надходить у звіті
+    const sub5Score = 0; // дослідник виставляє вручну
+
+    // ===== ЗАГАЛЬНИЙ БАЛ =====
+    const totalScore = simultaneousTotal + sub3Score + sub4Score + sub5Score;
+    // Макс. автоматично: 140 + 150 + 150 = 440; + субтест 5 вручну макс. 130 = 570
+
+    // ===== ЗВІТ ДЛЯ ДОСЛІДНИКА =====
+    const lines = [];
+    lines.push('=== РЕЗУЛЬТАТИ ДОСЛІДЖЕННЯ ===');
+    lines.push('Дата: ' + now.toLocaleString('uk-UA'));
+    lines.push('');
+    lines.push('--- СУБ1: Логічні матриці (' + sub1Score + '/60) ---');
+    for (let key in correctAnswers) {
+        const num = key.replace('m','');
+        const ua = userAnswers[key] || '(не обрано)';
+        const c = correctAnswers[key];
+        lines.push('  Завд.' + num + ': ' + ua + (ua===c?' ✓':' ✗ (прав.:'+c+')'));
+    }
+    lines.push('');
+    lines.push('--- СУБ2: Накладені фігури (' + sub2Score + '/80) ---');
+    lines.push('  Зобр.1: ' + (sub2Raw[0]||'(не заповнено)'));
+    lines.push('  Зобр.2: ' + (sub2Raw[1]||'(не заповнено)'));
+    lines.push('  Зобр.3: ' + (sub2Raw[2]||'(не заповнено)'));
+    lines.push('  Симультанна обробка разом: ' + simultaneousTotal + '/140');
+    lines.push('');
+    lines.push('--- СУБ3: Запам\'ятовування слів (' + sub3Score + '/150) ---');
+    lines.push('  Відповідь: ' + (sub3Raw||'(не заповнено)'));
+    lines.push('');
+    lines.push('--- СУБ4: Орієнтування (' + sub4Score + '/150) ---');
+    lines.push('  Тварина 1: ' + (document.getElementById('sub4_animal1')?.value||''));
+    lines.push('  Тварина 2: ' + (document.getElementById('sub4_animal2')?.value||''));
+    lines.push('  Тварина 3: ' + (document.getElementById('sub4_animal3')?.value||''));
+    lines.push('  Апельсин-Банан: ' + (document.getElementById('sub4_abs1')?.value||''));
+    lines.push('  Годинник-Лінійка: ' + (document.getElementById('sub4_abs2')?.value||''));
+    lines.push('  Потяг-Велосипед: ' + (document.getElementById('sub4_abs3')?.value||''));
+    lines.push('  Число: ' + (document.getElementById('sub4_date1')?.value||'') + ' (правильно: ' + todayDate + ')');
+    lines.push('  Місяць: ' + (document.getElementById('sub4_date2')?.value||'') + ' (правильно: ' + months[todayMonth] + ')');
+    lines.push('  Рік: ' + (document.getElementById('sub4_date3')?.value||'') + ' (правильно: ' + todayYear + ')');
+    lines.push('  День тижня: ' + (document.getElementById('sub4_date4')?.value||'') + ' (правильно: ' + days[todayDay] + ')');
+    lines.push('');
+    lines.push('--- СУБ5: Малювання годинника (0/130) ---');
+    lines.push('  !! Потребує ручного оцінювання дослідником (0–130 балів) !!');
+    lines.push('');
+    lines.push('=== АВТОМАТИЧНИЙ ПІДСУМОК (без суб5) ===');
+    lines.push('  Симультанна: ' + simultaneousTotal + '/140');
+    lines.push('  Сукцесивна:  ' + sub3Score + '/150');
+    lines.push('  Орієнтування: ' + sub4Score + '/150');
+    lines.push('  Планування (суб5 — вручну): __/130');
+    lines.push('  РАЗОМ (авто): ' + totalScore + ' (+ суб5 вручну)');
+    lines.push('  МАКСИМУМ: 570');
+
+    const subject = encodeURIComponent('Результати дослідження — ' + now.toLocaleString('uk-UA'));
+    const body = encodeURIComponent(lines.join('\n'));
+    window.open('mailto:mariiasivakova@gmail.com?subject=' + subject + '&body=' + body);
+
+    // Показуємо результат респонденту (показуємо лише автоматичну частину)
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('result-page').style.display = 'block';
+    document.getElementById('result-text').textContent = 'Чудовий результат!';
+    document.getElementById('result-score').textContent =
+        'У вас ' + totalScore + ' балів! Вітаю!';
+    window.scrollTo(0, 0);
+}
+
+// Змінні для поточної дати (для звіту)
+const _now = new Date();
+const todayDate  = _now.getDate();
+const todayMonth = _now.getMonth();
+const todayYear  = _now.getFullYear();
+const todayDay   = _now.getDay();
+</script>
+</body>
+</html>
