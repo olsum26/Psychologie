@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дослідження: Когнітивні чинники професіоналізації</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F5F0;
+  --card: #FFFFFF;
+  --accent: #2D5016;
+  --accent2: #4A7C28;
+  --gold: #B8962E;
+  --text: #1A1A1A;
+  --muted: #6B6B6B;
+  --border: #E0DDD7;
+  --danger: #C0392B;
+  --radius: 12px;
+  --shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:0}
+.bg-pattern{position:fixed;inset:0;z-index:0;background:
+  radial-gradient(ellipse at 20% 20%, rgba(45,80,22,0.06) 0%, transparent 60%),
+  radial-gradient(ellipse at 80% 80%, rgba(184,150,46,0.05) 0%, transparent 60%);
+  pointer-events:none}
+
+/* WRAPPER */
+.page{display:none;min-height:100vh;position:relative;z-index:1;padding:40px 20px}
+.page.active{display:block}
+.container{max-width:760px;margin:0 auto}
+
+/* PROGRESS BAR */
+.progress-wrap{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,245,240,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:12px 20px}
+.progress-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.progress-label{font-size:12px;color:var(--muted);white-space:nowrap;font-weight:500;letter-spacing:.03em}
+.progress-bar{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .5s ease}
+.timer-display{font-size:12px;color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.timer-display span{color:var(--accent);font-weight:600}
+
+/* CARD */
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);padding:40px;margin-top:80px}
+.card-sm{padding:28px 40px}
+
+/* HEADER */
+.survey-header{text-align:center;margin-bottom:36px}
+.survey-header .eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:8px}
+.survey-header h1{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:var(--accent);line-height:1.3;margin-bottom:12px}
+.survey-header p{font-size:14px;color:var(--muted);line-height:1.7}
+.divider{width:60px;height:2px;background:var(--gold);margin:20px auto}
+
+/* CONSENT */
+.consent-body{font-size:14px;line-height:1.8;color:var(--text)}
+.consent-body p{margin-bottom:16px}
+.consent-body strong{color:var(--accent)}
+
+/* INSTRUCTION BOX */
+.instruction{background:rgba(45,80,22,0.04);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:28px;font-size:13px;color:var(--muted);line-height:1.6}
+.instruction strong{color:var(--accent);display:block;margin-bottom:4px;font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+
+/* QUESTIONS */
+.question-block{border-bottom:1px solid var(--border);padding:20px 0}
+.question-block:last-of-type{border-bottom:none}
+.q-text{font-size:14px;font-weight:500;color:var(--text);margin-bottom:14px;line-height:1.6}
+.q-num{display:inline-block;width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;font-size:11px;font-weight:600;text-align:center;line-height:24px;margin-right:10px;flex-shrink:0}
+
+/* CRT: short text input */
+.crt-input-wrap{display:flex;align-items:center;gap:12px}
+.crt-input{border:1.5px solid var(--border);border-radius:8px;padding:10px 16px;font-size:14px;font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:var(--bg);width:200px;transition:border-color .2s}
+.crt-input:focus{outline:none;border-color:var(--accent)}
+.crt-unit{font-size:13px;color:var(--muted)}
+
+/* LIKERT */
+.likert-wrap{display:flex;gap:8px;flex-wrap:wrap}
+.likert-opt{position:relative}
+.likert-opt input{position:absolute;opacity:0;width:0;height:0}
+.likert-opt label{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;transition:all .18s;min-width:52px;background:var(--bg)}
+.likert-opt label .num{font-size:16px;font-weight:600;color:var(--muted)}
+.likert-opt label .lbl{font-size:10px;color:var(--muted);text-align:center;line-height:1.3;max-width:60px}
+.likert-opt input:checked + label{border-color:var(--accent);background:rgba(45,80,22,0.06)}
+.likert-opt input:checked + label .num{color:var(--accent)}
+.likert-opt label:hover{border-color:var(--accent2)}
+
+/* SCALE LABELS */
+.scale-labels{display:flex;justify-content:space-between;margin-bottom:8px;font-size:11px;color:var(--muted);font-style:italic}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:8px;font-size:14px;font-weight:500;font-family:'IBM Plex Sans',sans-serif;cursor:pointer;border:none;transition:all .2s;letter-spacing:.02em}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 4px 12px rgba(45,80,22,0.3)}
+.btn-primary:active{transform:translateY(0)}
+.btn-wrap{display:flex;justify-content:flex-end;margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+
+/* SECTION TITLE */
+.section-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(45,80,22,0.08);color:var(--accent);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:500;letter-spacing:.04em;margin-bottom:20px}
+.section-num{width:20px;height:20px;background:var(--accent);color:#fff;border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+/* PAGE TIMER */
+.page-timer-box{background:rgba(184,150,46,0.08);border:1px solid rgba(184,150,46,0.3);border-radius:8px;padding:10px 16px;display:inline-flex;align-items:center;gap:10px;margin-bottom:20px;font-size:13px;color:var(--gold)}
+.page-timer-box .pt-val{font-weight:600;font-variant-numeric:tabular-nums}
+
+/* RESULTS PAGE */
+.result-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:28px;margin-bottom:16px;box-shadow:var(--shadow)}
+.result-card h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--accent);margin-bottom:12px}
+.result-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px}
+.result-row:last-child{border-bottom:none}
+.result-row .label{color:var(--muted)}
+.result-row .score{font-weight:600;color:var(--accent);font-size:16px}
+.result-interp{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.6;padding:10px 14px;background:var(--bg);border-radius:8px}
+.congrats{text-align:center;padding:32px 0 20px}
+.congrats h2{font-family:'Playfair Display',serif;font-size:26px;color:var(--accent);margin-bottom:12px}
+.congrats p{font-size:14px;color:var(--muted);line-height:1.7}
+.sending-status{text-align:center;margin-top:20px;font-size:13px;color:var(--muted);padding:12px;border-radius:8px;border:1px solid var(--border)}
+.sending-status.ok{color:var(--accent2);border-color:rgba(74,124,40,0.3);background:rgba(74,124,40,0.06)}
+.sending-status.err{color:var(--danger);border-color:rgba(192,57,43,0.3);background:rgba(192,57,43,0.06)}
+
+/* VALIDATION */
+.field-error{font-size:11px;color:var(--danger);margin-top:6px;display:none}
+.question-block.invalid .field-error{display:block}
+.question-block.invalid .crt-input{border-color:var(--danger)}
+.question-block.invalid .likert-wrap{outline:2px solid rgba(192,57,43,0.3);border-radius:8px}
+
+@media(max-width:600px){
+  .card{padding:24px 16px;margin-top:72px}
+  .likert-wrap{gap:5px}
+  .likert-opt label{min-width:44px;padding:6px 6px}
+  .likert-opt label .lbl{display:none}
+}
+</style>
+</head>
+<body>
+<div class="bg-pattern"></div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-wrap" id="progressBar" style="display:none">
+  <div class="progress-inner">
+    <span class="progress-label" id="progressLabel">Сторінка 1 з 4</span>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:25%"></div></div>
+    <span class="timer-display">Загальний час: <span id="totalTimer">00:00</span></span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     СТОРІНКА 0: ПОІНФОРМОВАНА ЗГОДА
+════════════════════════════════════════════════════════ -->
+<div class="page active" id="page-0">
+  <div class="container">
+    <div class="card">
+      <div class="survey-header">
+        <div class="eyebrow">Дипломна бакалаврська робота · Психологія</div>
+        <h1>Когнітивні чинники<br>професіоналізації особистості</h1>
+        <div class="divider"></div>
+        <p>ПНПУ імені К. Д. Ушинського · Олена Сумська · 2026</p>
+      </div>
+
+      <div style="background:rgba(45,80,22,0.04);border-radius:10px;padding:28px;margin-bottom:28px">
+        <p style="font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px">⚖ Поінформована згода</p>
+        <div class="consent-body">
+          <p>Вітаю! Це дослідження проводиться в межах моєї дипломної бакалаврської роботи за спеціальністю <strong>«Психологія»</strong> на тему <strong>«Когнітивні чинники професіоналізації особистості»</strong>.</p>
+          <p>Ваша участь є <strong>повністю добровільною та анонімною</strong>, а всі отримані дані будуть використані виключно в узагальненому вигляді для наукових цілей згідно з <strong>Етичним кодексом психолога</strong>.</p>
+          <p>Ви маєте право припинити опитування в будь-який момент, просто закривши вкладку.</p>
+          <p style="margin-bottom:0">Натискаючи «Далі», ви надаєте згоду на участь в опитуванні та обробку ваших відповідей.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:32px">
+        <span>📋 3 методики</span>
+        <span>⏱ Орієнтовно 15–20 хвилин</span>
+        <span>🔒 Анонімно</span>
+      </div>
+
+      <div class="btn-wrap" style="justify-content:center;border-top:none;padding-top:0">
+        <button class="btn btn-primary" onclick="goToPage(1)">Далі →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     СТОРІНКА 1: CRT-7
+════════════════════════════════════════════════════════ -->
+<div class="page" id="page-1">
+  <div class="container">
+    <div class="card">
+      <div class="section-badge"><div class="section-num">1</div>Тест когнітивної рефлексії</div>
+      <div class="survey-header" style="text-align:left;margin-bottom:0">
+        <h1 style="font-size:22px">CRT-7</h1>
+        <p style="margin-top:6px">Cognitive Reflection Test · Frederick, 2005; Toplak et al., 2014</p>
+      </div>
+      <div class="page-timer-box" style="margin-top:16px">
+        ⏱ Час на цій сторінці: <span class="pt-val" id="pageTimer1">00:00</span>
+      </div>
+
+      <div class="instruction">
+        <strong>Інструкція</strong>
+        Нижче наведено сім задач. Для кожної запишіть Вашу відповідь у відведеному місці. Уважно перечитайте умову перш ніж відповідати.
+      </div>
+
+      <div id="crt-questions">
+
+        <div class="question-block" data-q="crt1">
+          <p class="q-text"><span class="q-num">1</span>Лялька і м'яч разом коштують 1 грн 10 коп. Лялька коштує на 1 грн більше, ніж м'яч. Скільки коштує м'яч?</p>
+          <div class="crt-input-wrap">
+            <input class="crt-input" type="text" placeholder="Ваша відповідь" id="crt_1" autocomplete="off">
+            <span class="crt-unit">копійок</span>
+          </div>
+          <div class="field-error">Будь ласка, введіть відповідь</div>
+        </div>
+
+        <div class="question-block" data-q="crt2">
+          <p class="q-text"><span class="q-num">2</span>Якщо 5 машин виготовляють 5 деталей за 5 хвилин, скільки часу потрібно 100 машинам, щоб виготовити 100 деталей?</p>
+          <div class="crt-input-wrap">
+            <input class="crt-input" type="text" placeholder="Ваша відповідь" id="crt_2" autocomplete="off">
+            <span class="crt-unit">хвилин</span>
+          </div>
+          <div class="field-error">Будь ласка, введіть відповідь</div>
+        </div>
+
+        <div class="question-block" data-q="crt3">
+          <p class="q-text"><span class="q-num">3</span>На озері є поле ряски. Кожен день поле подвоюється у розмірі. Якщо для покриття всього озера ряскою потрібно 48 днів, скільки днів потрібно для покриття половини озера?</p>
+          <div class="crt-input-wrap">
+            <input class="crt-input" type="text" placeholder="Ваша відповідь" id="crt_3" autocomplete="off">
+            <span class="crt-unit">днів</span>
+          </div>
+          <div class="field-error">Будь ласка, введіть відповідь</div>
+        </div>
+
+        <div class="question-block" data-q="crt4">
+          <p class="q-text"><span class="q-num">4</span>Якщо Іван може випити одне барило пива за 2 тижні, а Марія — за 4 тижні, скільки часу знадобиться їм обом, щоб випити одне барило разом?</p>
+          <div class="crt-input-wrap">
+            <input class="crt-input" type="text" placeholder="Ваша відповідь" id="crt_4" autocomplete="off">
+            <span class="crt-unit">тижнів</span>
+          </div>
+          <div class="field-error">Будь ласка, введіть відповідь</div>
+        </div>
+
+        <div class="question-block" data-q="crt5">
+          <p class="q-text"><span class="q-num">5</span>Фермер має 16 овець. Всі, крім 9, гинуть. Скільки овець залишається?</p>
+          <div class="crt-input-wrap">
+            <input class="crt-input" type="text" placeholder="Ваша відповідь" id="crt_5" autocomplete="off">
+            <span class="crt-unit">овець</span>
+          </div>
+          <div class="field-error">Будь ласка, введіть відповідь</div>
+        </div>
+
+        <div class="question-block" data-q="crt6">
+          <p class="q-text"><span class="q-num">6</span>Якщо ви перевернете банку з льодом вгору дном, яка сторона виявиться внизу?</p>
+          <div class="crt-input-wrap">
+            <input class="crt-input" type="text" placeholder="Ваша відповідь" id="crt_6" autocomplete="off">
+          </div>
+          <div class="field-error">Будь ласка, введіть відповідь</div>
+        </div>
+
+        <div class="question-block" data-q="crt7">
+          <p class="q-text"><span class="q-num">7</span>Студент отримав такий самий результат, що й середній студент у класі. Він — у верхній половині, нижній половині чи точно посередині?</p>
+          <div class="crt-input-wrap">
+            <input class="crt-input" type="text" placeholder="Ваша відповідь" id="crt_7" autocomplete="off">
+          </div>
+          <div class="field-error">Будь ласка, введіть відповідь</div>
+        </div>
+
+      </div>
+
+      <div class="btn-wrap">
+        <button class="btn btn-primary" onclick="validateAndGo(1,2)">Далі →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     СТОРІНКА 2: NFC-18
+════════════════════════════════════════════════════════ -->
+<div class="page" id="page-2">
+  <div class="container">
+    <div class="card">
+      <div class="section-badge"><div class="section-num">2</div>Шкала потреби в пізнанні</div>
+      <div class="survey-header" style="text-align:left;margin-bottom:0">
+        <h1 style="font-size:22px">NFC-18</h1>
+        <p style="margin-top:6px">Need for Cognition Scale · Cacioppo & Petty, 1982; адаптована україномовна версія</p>
+      </div>
+      <div class="page-timer-box" style="margin-top:16px">
+        ⏱ Час на цій сторінці: <span class="pt-val" id="pageTimer2">00:00</span>
+      </div>
+
+      <div class="instruction">
+        <strong>Інструкція</strong>
+        Оцініть кожне твердження за шкалою від 1 до 5: <br>
+        1 – зовсім не відповідає мені &nbsp;·&nbsp; 2 – скоріше не відповідає &nbsp;·&nbsp; 3 – важко сказати &nbsp;·&nbsp; 4 – скоріше відповідає &nbsp;·&nbsp; 5 – повністю відповідає мені.
+      </div>
+
+      <div id="nfc-questions"></div>
+
+      <div class="btn-wrap">
+        <button class="btn btn-primary" onclick="validateAndGo(2,3)">Далі →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     СТОРІНКА 3: ДТР-30
+════════════════════════════════════════════════════════ -->
+<div class="page" id="page-3">
+  <div class="container">
+    <div class="card">
+      <div class="section-badge"><div class="section-num">3</div>Диференціальний тип рефлексії</div>
+      <div class="survey-header" style="text-align:left;margin-bottom:0">
+        <h1 style="font-size:22px">ДТР</h1>
+        <p style="margin-top:6px">Леонтьєв, Лаптєва, Осін, Саліхова, 2009; адаптована україномовна версія</p>
+      </div>
+      <div class="page-timer-box" style="margin-top:16px">
+        ⏱ Час на цій сторінці: <span class="pt-val" id="pageTimer3">00:00</span>
+      </div>
+
+      <div class="instruction">
+        <strong>Інструкція</strong>
+        Оцініть кожне твердження за шкалою:<br>
+        1 – зовсім не підходить &nbsp;·&nbsp; 2 – скоріше не підходить &nbsp;·&nbsp; 3 – скоріше підходить &nbsp;·&nbsp; 4 – повністю підходить.
+      </div>
+
+      <p style="font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:500;letter-spacing:.04em;text-transform:uppercase">Шкала 1 — Системна рефлексія</p>
+      <div id="dtr-sr-questions"></div>
+
+      <p style="font-size:12px;color:var(--muted);margin:20px 0 8px;font-weight:500;letter-spacing:.04em;text-transform:uppercase">Шкала 2 — Інтроспекція</p>
+      <div id="dtr-in-questions"></div>
+
+      <p style="font-size:12px;color:var(--muted);margin:20px 0 8px;font-weight:500;letter-spacing:.04em;text-transform:uppercase">Шкала 3 — Квазі-рефлексія</p>
+      <div id="dtr-kr-questions"></div>
+
+      <div class="btn-wrap">
+        <button class="btn btn-primary" onclick="validateAndGo(3,4)">Завершити тестування →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     СТОРІНКА 4: РЕЗУЛЬТАТИ
+════════════════════════════════════════════════════════ -->
+<div class="page" id="page-4">
+  <div class="container">
+    <div class="card" style="margin-top:90px">
+      <div class="congrats">
+        <div style="font-size:48px;margin-bottom:16px">🎉</div>
+        <h2>Вітаю! Чудовий результат!</h2>
+        <p id="resultSummary" style="max-width:520px;margin:0 auto;margin-top:12px"></p>
+      </div>
+
+      <div class="divider" style="margin:28px auto"></div>
+
+      <!-- CRT -->
+      <div class="result-card" id="resCRT">
+        <h3>CRT-7 — Тест когнітивної рефлексії</h3>
+        <div class="result-row">
+          <span class="label">Кількість правильних відповідей</span>
+          <span class="score" id="crtScore">—</span>
+        </div>
+        <div class="result-row">
+          <span class="label">Час виконання</span>
+          <span class="score" id="crtTime">—</span>
+        </div>
+        <div class="result-interp" id="crtInterp"></div>
+      </div>
+
+      <!-- NFC -->
+      <div class="result-card" id="resNFC">
+        <h3>NFC-18 — Шкала потреби в пізнанні</h3>
+        <div class="result-row">
+          <span class="label">Загальний бал (18–90)</span>
+          <span class="score" id="nfcScore">—</span>
+        </div>
+        <div class="result-row">
+          <span class="label">Час виконання</span>
+          <span class="score" id="nfcTime">—</span>
+        </div>
+        <div class="result-interp" id="nfcInterp"></div>
+      </div>
+
+      <!-- DTR -->
+      <div class="result-card" id="resDTR">
+        <h3>ДТР — Диференціальний тип рефлексії</h3>
+        <div class="result-row">
+          <span class="label">Системна рефлексія (10–40)</span>
+          <span class="score" id="dtrSR">—</span>
+        </div>
+        <div class="result-row">
+          <span class="label">Інтроспекція (10–40)</span>
+          <span class="score" id="dtrIN">—</span>
+        </div>
+        <div class="result-row">
+          <span class="label">Квазі-рефлексія (10–40)</span>
+          <span class="score" id="dtrKR">—</span>
+        </div>
+        <div class="result-row">
+          <span class="label">Час виконання</span>
+          <span class="score" id="dtrTime">—</span>
+        </div>
+        <div class="result-interp" id="dtrInterp"></div>
+      </div>
+
+      <!-- Timing summary -->
+      <div class="result-card">
+        <h3>⏱ Час виконання</h3>
+        <div class="result-row"><span class="label">Загальний час</span><span class="score" id="totalTime">—</span></div>
+      </div>
+
+      <div class="sending-status" id="sendStatus">Надсилання результатів на пошту дослідника…</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════
+
+const NFC_ITEMS = [
+  {n:1,  text:"Мені подобається розмірковувати над складними проблемами.", rev:false},
+  {n:2,  text:"Мені цікаво думати над абстрактними ідеями.", rev:false},
+  {n:3,  text:"Мені не подобається думати над важкими питаннями.", rev:true},
+  {n:4,  text:"Я вважаю за краще виконувати прості завдання, ніж складні.", rev:true},
+  {n:5,  text:"Мені не цікаво витрачати час на роздуми там, де достатньо інтуїції.", rev:true},
+  {n:6,  text:"Я відчуваю задоволення, коли мені вдається вирішити складну проблему.", rev:false},
+  {n:7,  text:"Я вважаю за краще, щоб завдання не потребувало глибокого осмислення.", rev:true},
+  {n:8,  text:"Мені нецікаві задачі, для яких потрібне довготривале мислення.", rev:true},
+  {n:9,  text:"Я уникаю ситуацій, що вимагають великих розумових зусиль.", rev:true},
+  {n:10, text:"Я насолоджуюся процесом пізнання нового.", rev:false},
+  {n:11, text:"Мені подобається вивчати складні речі, навіть якщо це не пов'язано з моїми обов'язками.", rev:false},
+  {n:12, text:"Складні питання не приносять мені задоволення.", rev:true},
+  {n:13, text:"Мені більше подобається думати про дрібні, щоденні справи, ніж про довготривалі плани.", rev:true},
+  {n:14, text:"Я схильна(ий) багато роздумувати перш ніж прийняти рішення.", rev:false},
+  {n:15, text:"Я люблю ситуації, де мені потрібно знайти нові підходи до вирішення задачі.", rev:false},
+  {n:16, text:"Мені достатньо базового розуміння речей — мені не потрібно вникати глибоко.", rev:true},
+  {n:17, text:"Я рідко замислююся над тим, чому речі відбуваються саме так.", rev:true},
+  {n:18, text:"Я вважаю, що мислення — це розвага сама по собі.", rev:false},
+];
+
+const DTR_ITEMS = [
+  // SR 1-10
+  {n:1,  text:"Я розглядаю ситуацію з різних точок зору, перш ніж прийняти рішення.", scale:"sr"},
+  {n:2,  text:"Я здатна(ий) подивитися на себе ніби збоку.", scale:"sr"},
+  {n:3,  text:"Я аналізую свою поведінку, щоб зрозуміти її причини.", scale:"sr"},
+  {n:4,  text:"Я замислююся над тим, як мої дії впливають на оточуючих.", scale:"sr"},
+  {n:5,  text:"Обдумування власного досвіду допомагає мені краще зрозуміти себе.", scale:"sr"},
+  {n:6,  text:"Я помічаю певні закономірності у своїй поведінці.", scale:"sr"},
+  {n:7,  text:"Я аналізую, що можна було б зробити краще.", scale:"sr"},
+  {n:8,  text:"Я намагаюся зрозуміти, чому реагую саме так, а не інакше.", scale:"sr"},
+  {n:9,  text:"Я ставлю під сумнів власні думки й висновки.", scale:"sr"},
+  {n:10, text:"Я здатна(ий) змінити своє бачення ситуації на основі нової інформації.", scale:"sr"},
+  // IN 11-20
+  {n:11, text:"Я часто думаю про свої почуття і переживання.", scale:"in"},
+  {n:12, text:"Я схильна(ий) довго аналізувати свій настрій і стан.", scale:"in"},
+  {n:13, text:"Мені буває важко перестати думати про проблему, навіть коли вона вже вирішена.", scale:"in"},
+  {n:14, text:"Я часто повертаюся думками до минулих подій.", scale:"in"},
+  {n:15, text:"Я помічаю кожну зміну свого внутрішнього стану.", scale:"in"},
+  {n:16, text:"Я надто часто зосереджуюся на тому, як я себе почуваю.", scale:"in"},
+  {n:17, text:"Мені важко перемкнутися з роздумів про себе на зовнішній світ.", scale:"in"},
+  {n:18, text:"Я знаю про себе більше, ніж зазвичай знають про себе люди.", scale:"in"},
+  {n:19, text:"Я часто аналізую свої почуття навіть тоді, коли це заважає справі.", scale:"in"},
+  {n:20, text:"Я думаю про причини своїх емоцій частіше, ніж більшість людей.", scale:"in"},
+  // KR 21-30
+  {n:21, text:"Я часто замислююся про те, що могло б бути, якби я зробила(в) інакше.", scale:"kr"},
+  {n:22, text:"Я люблю фантазувати про альтернативні варіанти свого минулого.", scale:"kr"},
+  {n:23, text:"Мені буває важко зосередитися на теперішньому, бо я думаю про минуле або майбутнє.", scale:"kr"},
+  {n:24, text:"Я часто уявляю, що могло б трапитися, якби все пішло інакше.", scale:"kr"},
+  {n:25, text:"Я відволікаюся на уявні сценарії, які не мають стосунку до реального завдання.", scale:"kr"},
+  {n:26, text:"Думки про «а що, якби…» часто приходять до мене без запрошення.", scale:"kr"},
+  {n:27, text:"Мені важко повністю присвятити увагу тому, що відбувається тут і зараз.", scale:"kr"},
+  {n:28, text:"Я занурююся у фантазії про можливі майбутні події.", scale:"kr"},
+  {n:29, text:"Я думаю про минулі події так, ніби можу їх змінити.", scale:"kr"},
+  {n:30, text:"Уявні роздуми про «інші варіанти» займають у мене багато часу.", scale:"kr"},
+];
+
+// CRT correct answers (normalised lowercase)
+const CRT_CORRECT = {
+  crt_1: ['5', '5 коп', '5 копійок', '5коп'],
+  crt_2: ['5', '5 хв', '5 хвилин', '5хв'],
+  crt_3: ['47', '47 днів', '47днів'],
+  crt_4: ['1.33', '1,33', '1.3', '1,3', '1 тиждень і 2 дні', '1 тиж', '4/3'],
+  crt_5: ['9', '9 овець'],
+  crt_6: ['верхня', 'верхня сторона', 'та що була верхньою', 'яка була зверху'],
+  crt_7: ['точно посередині', 'посередині', 'точно по середині', 'по середині'],
+};
+
+// ═══════════════════════════════════════════════════════
+// RENDER LIKERT
+// ═══════════════════════════════════════════════════════
+function makeLikert(container, items, prefix, max, labels) {
+  const wrap = document.getElementById(container);
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  items.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'question-block';
+    div.dataset.q = prefix + item.n;
+    let opts = '';
+    const labArr = labels || [];
+    for (let v = 1; v <= max; v++) {
+      const lbl = labArr[v-1] || '';
+      opts += `<div class="likert-opt">
+        <input type="radio" name="${prefix}${item.n}" id="${prefix}${item.n}_${v}" value="${v}">
+        <label for="${prefix}${item.n}_${v}">
+          <span class="num">${v}</span>
+          ${lbl ? `<span class="lbl">${lbl}</span>` : ''}
+        </label>
+      </div>`;
+    }
+    div.innerHTML = `
+      <p class="q-text"><span class="q-num">${item.n}</span>${item.text}</p>
+      <div class="likert-wrap">${opts}</div>
+      <div class="field-error">Будь ласка, оберіть відповідь</div>`;
+    wrap.appendChild(div);
+  });
+}
+
+const NFC_LABELS = ['Зовсім не відповідає','Скоріше не відповідає','Важко сказати','Скоріше відповідає','Повністю відповідає'];
+const DTR_LABELS = ['Зовсім не підходить','Скоріше не підходить','Скоріше підходить','Повністю підходить'];
+
+makeLikert('nfc-questions',  NFC_ITEMS, 'nfc', 5, NFC_LABELS);
+makeLikert('dtr-sr-questions', DTR_ITEMS.filter(i=>i.scale==='sr'), 'dtr', 4, DTR_LABELS);
+makeLikert('dtr-in-questions', DTR_ITEMS.filter(i=>i.scale==='in'), 'dtr', 4, DTR_LABELS);
+makeLikert('dtr-kr-questions', DTR_ITEMS.filter(i=>i.scale==='kr'), 'dtr', 4, DTR_LABELS);
+
+// ═══════════════════════════════════════════════════════
+// TIMERS
+// ═══════════════════════════════════════════════════════
+let totalSec = 0, totalInterval;
+let pageSec = {1:0, 2:0, 3:0};
+let pageInterval = null;
+let currentPageTimer = null;
+
+function fmtTime(s) {
+  const m = Math.floor(s/60), ss = s%60;
+  return String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0');
+}
+
+function startTotalTimer() {
+  totalInterval = setInterval(()=>{
+    totalSec++;
+    document.getElementById('totalTimer').textContent = fmtTime(totalSec);
+  }, 1000);
+}
+
+function startPageTimer(pageNum) {
+  if (pageInterval) clearInterval(pageInterval);
+  currentPageTimer = pageNum;
+  pageInterval = setInterval(()=>{
+    pageSec[pageNum]++;
+    const el = document.getElementById('pageTimer'+pageNum);
+    if (el) el.textContent = fmtTime(pageSec[pageNum]);
+  }, 1000);
+}
+
+function stopPageTimer() {
+  if (pageInterval) clearInterval(pageInterval);
+  pageInterval = null;
+}
+
+// ═══════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════
+let currentPage = 0;
+
+function goToPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-'+n).classList.add('active');
+  currentPage = n;
+  window.scrollTo({top:0, behavior:'smooth'});
+
+  const pb = document.getElementById('progressBar');
+  if (n === 0) {
+    pb.style.display = 'none';
+    return;
+  }
+  pb.style.display = 'block';
+
+  if (n === 1) startTotalTimer();
+
+  const labels = ['','Тест CRT-7 (1 з 3)','Шкала NFC-18 (2 з 3)','Методика ДТР (3 з 3)','Результати'];
+  document.getElementById('progressLabel').textContent = labels[n] || '';
+  const pct = [0, 25, 50, 75, 100][n] || 0;
+  document.getElementById('progressFill').style.width = pct+'%';
+
+  if (n >= 1 && n <= 3) startPageTimer(n);
+  else stopPageTimer();
+
+  if (n === 4) {
+    stopPageTimer();
+    clearInterval(totalInterval);
+    showResults();
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// VALIDATION
+// ═══════════════════════════════════════════════════════
+function validateAndGo(fromPage, toPage) {
+  let ok = true;
+  if (fromPage === 1) {
+    for (let i = 1; i <= 7; i++) {
+      const el = document.getElementById('crt_'+i);
+      const block = el.closest('.question-block');
+      block.classList.remove('invalid');
+      if (!el.value.trim()) { block.classList.add('invalid'); ok = false; }
+    }
+  } else {
+    const prefix = fromPage === 2 ? 'nfc' : 'dtr';
+    const total = fromPage === 2 ? 18 : 30;
+    const start = fromPage === 2 ? 1 : 1;
+    for (let i = start; i <= (fromPage===2?18:30); i++) {
+      const sel = document.querySelector(`input[name="${prefix}${fromPage===2?i:DTR_ITEMS[i-1].n}"]:checked`);
+      const name = fromPage===2 ? `nfc${i}` : `dtr${DTR_ITEMS[i-1].n}`;
+      const block = document.querySelector(`[data-q="${name}"]`);
+      if (block) block.classList.remove('invalid');
+      if (!sel && block) { block.classList.add('invalid'); ok = false; }
+    }
+  }
+  if (!ok) {
+    const firstInvalid = document.querySelector('.question-block.invalid');
+    if (firstInvalid) firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  goToPage(toPage);
+}
+
+// ═══════════════════════════════════════════════════════
+// SCORING
+// ═══════════════════════════════════════════════════════
+function scoreCRT() {
+  let score = 0;
+  const answers = {};
+  for (let i = 1; i <= 7; i++) {
+    const val = document.getElementById('crt_'+i).value.trim().toLowerCase();
+    answers['crt_'+i] = val;
+    const correct = CRT_CORRECT['crt_'+i];
+    if (correct.some(c => val === c || val.replace(/\s/g,'') === c.replace(/\s/g,''))) score++;
+  }
+  return {score, answers};
+}
+
+function scoreNFC() {
+  let total = 0;
+  const answers = {};
+  NFC_ITEMS.forEach(item => {
+    const sel = document.querySelector(`input[name="nfc${item.n}"]:checked`);
+    let v = sel ? parseInt(sel.value) : 0;
+    answers['nfc_'+item.n] = v;
+    if (item.rev) v = 6 - v;
+    total += v;
+  });
+  return {score: total, answers};
+}
+
+function scoreDTR() {
+  let sr=0, inn=0, kr=0;
+  const answers = {};
+  DTR_ITEMS.forEach(item => {
+    const sel = document.querySelector(`input[name="dtr${item.n}"]:checked`);
+    const v = sel ? parseInt(sel.value) : 0;
+    answers['dtr_'+item.n] = v;
+    if (item.scale==='sr') sr += v;
+    else if (item.scale==='in') inn += v;
+    else kr += v;
+  });
+  return {sr, inn, kr, answers};
+}
+
+function interpCRT(s) {
+  if (s <= 2) return '0–2 бали — переважання інтуїтивного мислення. Ви схильні покладатись на перше відчуття та інтуїцію при розв\'язанні задач.';
+  if (s <= 5) return '3–5 балів — збалансований тип мислення. Ви поєднуєте аналітичний підхід та інтуїцію залежно від ситуації.';
+  return '6–7 балів — виражений аналітичний стиль. Ви схильні до ретельного обдумування та критичного аналізу перш ніж дати відповідь.';
+}
+
+function interpNFC(s) {
+  if (s < 50) return `${s} балів — низька потреба в пізнанні. Ви надаєте перевагу практичним та конкретним задачам над абстрактними роздумами.`;
+  if (s <= 70) return `${s} балів — середній рівень потреби в пізнанні. Вам цікаво думати, і ви отримуєте задоволення від вирішення складних питань.`;
+  return `${s} балів — висока потреба в пізнанні. Інтелектуальна діяльність є для вас природним і приємним процесом.`;
+}
+
+function interpDTR(sr, inn, kr) {
+  const parts = [];
+  parts.push(`Системна рефлексія: ${sr} — ${sr > 28 ? 'виражена здатність аналізувати ситуацію з різних боків (адаптивний показник).' : 'помірний рівень аналітичного погляду на власну поведінку.'}`);
+  parts.push(`Інтроспекція: ${inn} — ${inn > 28 ? 'висока схильність до зосередження на власних переживаннях; може бути надмірною.' : 'помірний рівень занурення у власні стани.'}`);
+  parts.push(`Квазі-рефлексія: ${kr} — ${kr > 28 ? 'виражена схильність до відходу у фантазії та «а що, якби…»-роздуми.' : 'помірна схильність до альтернативних сценаріїв.'}`);
+  return parts.join(' ');
+}
+
+// ═══════════════════════════════════════════════════════
+// SHOW RESULTS
+// ═══════════════════════════════════════════════════════
+function showResults() {
+  const crt = scoreCRT();
+  const nfc = scoreNFC();
+  const dtr = scoreDTR();
+
+  document.getElementById('crtScore').textContent = crt.score + ' / 7';
+  document.getElementById('nfcScore').textContent = nfc.score + ' балів';
+  document.getElementById('dtrSR').textContent = dtr.sr + ' балів';
+  document.getElementById('dtrIN').textContent = dtr.inn + ' балів';
+  document.getElementById('dtrKR').textContent = dtr.kr + ' балів';
+
+  document.getElementById('crtTime').textContent = fmtTime(pageSec[1]);
+  document.getElementById('nfcTime').textContent = fmtTime(pageSec[2]);
+  document.getElementById('dtrTime').textContent = fmtTime(pageSec[3]);
+  document.getElementById('totalTime').textContent = fmtTime(totalSec);
+
+  document.getElementById('crtInterp').textContent = interpCRT(crt.score);
+  document.getElementById('nfcInterp').textContent = interpNFC(nfc.score);
+  document.getElementById('dtrInterp').textContent = interpDTR(dtr.sr, dtr.inn, dtr.kr);
+
+  document.getElementById('resultSummary').innerHTML =
+    `Ви маєте: <strong>CRT-7: ${crt.score}/7</strong> · <strong>NFC: ${nfc.score} балів</strong> · <strong>ДТР: СР=${dtr.sr}, ІН=${dtr.inn}, КР=${dtr.kr}</strong>`;
+
+  sendEmail(crt, nfc, dtr);
+}
+
+// ═══════════════════════════════════════════════════════
+// EMAIL via EmailJS (free tier)
+// ═══════════════════════════════════════════════════════
+function buildEmailBody(crt, nfc, dtr) {
+  const ts = new Date().toLocaleString('uk-UA');
+
+  let crtAnswers = '';
+  for (let i=1;i<=7;i++) {
+    crtAnswers += `  Питання ${i}: ${crt.answers['crt_'+i]}\n`;
+  }
+
+  let nfcAnswers = '';
+  NFC_ITEMS.forEach(item => {
+    nfcAnswers += `  NFC-${item.n}: ${nfc.answers['nfc_'+item.n]}${item.rev?' [зворот.]':''}\n`;
+  });
+
+  let dtrAnswers = '';
+  DTR_ITEMS.forEach(item => {
+    dtrAnswers += `  ДТР-${item.n} [${item.scale.toUpperCase()}]: ${dtr.answers['dtr_'+item.n]}\n`;
+  });
+
+  return `
+═══════════════════════════════════════
+РЕЗУЛЬТАТИ ПСИХОДІАГНОСТИЧНОГО ОПИТУВАННЯ
+Дослідження: «Когнітивні чинники професіоналізації особистості»
+Виконавець: Олена Сумська, ПНПУ ім. К. Д. Ушинського, 42 група
+Дата: ${ts}
+═══════════════════════════════════════
+
+── CRT-7 (Тест когнітивної рефлексії) ──
+Результат: ${crt.score} / 7
+Час виконання: ${fmtTime(pageSec[1])}
+Інтерпретація: ${interpCRT(crt.score)}
+
+Відповіді:
+${crtAnswers}
+
+── NFC-18 (Шкала потреби в пізнанні) ──
+Загальний бал: ${nfc.score} / 90
+Час виконання: ${fmtTime(pageSec[2])}
+Інтерпретація: ${interpNFC(nfc.score)}
+
+Відповіді:
+${nfcAnswers}
+
+── ДТР (Диференціальний тип рефлексії) ──
+Системна рефлексія (СР): ${dtr.sr} / 40
+Інтроспекція (ІН): ${dtr.inn} / 40
+Квазі-рефлексія (КР): ${dtr.kr} / 40
+Час виконання: ${fmtTime(pageSec[3])}
+Інтерпретація: ${interpDTR(dtr.sr, dtr.inn, dtr.kr)}
+
+Відповіді:
+${dtrAnswers}
+
+── ТАЙМИНГ ──
+Загальний час: ${fmtTime(totalSec)}
+CRT: ${fmtTime(pageSec[1])} | NFC: ${fmtTime(pageSec[2])} | ДТР: ${fmtTime(pageSec[3])}
+
+═══════════════════════════════════════
+`;
+}
+
+function sendEmail(crt, nfc, dtr) {
+  const body = buildEmailBody(crt, nfc, dtr);
+  const statusEl = document.getElementById('sendStatus');
+
+  const subject = encodeURIComponent(
+    'Результати опитування CRT/NFC/ДТР — ' + new Date().toLocaleDateString('uk-UA')
+  );
+
+  // mailto має обмеження ~2000 символів у деяких клієнтах,
+  // тому надсилаємо короткий summary + повні відповіді окремим блоком
+  const bodyEnc = encodeURIComponent(body);
+  const mailtoLink = `mailto:mariiasivakova@gmail.com?subject=${subject}&body=${bodyEnc}`;
+
+  // Відкриваємо поштовий клієнт одразу — без жодних кнопок
+  window.location.href = mailtoLink;
+
+  // Статус для респондента
+  statusEl.className = 'sending-status ok';
+  statusEl.innerHTML =
+    '📬 Зараз відкриється ваш поштовий клієнт із готовим листом.' +
+    '<br>Будь ласка, натисніть <strong>«Надіслати»</strong> — це останній крок.' +
+    '<br><small>Якщо вікно не відкрилось — перевірте, чи є у вас встановлений поштовий клієнт (Gmail, Outlook тощо).</small>';
+}
+</script>
+</body>
+</html>
